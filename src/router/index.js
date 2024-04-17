@@ -20,6 +20,12 @@ const router = createRouter({
       name: 'noticias',
      
       component: () => import('../views/NoticiasView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+     
+      component: () => import('../views/LoginView.vue')
     }
   ]
 })
