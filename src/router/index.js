@@ -10,10 +10,10 @@ const router = createRouter({
       component: InicioView
     },
     {
-      path: '/suscripcion',
-      name: 'suscripcion',
+      path: '/subscripcion',
+      name: 'subscripcion',
       
-      component: () => import('../views/SuscripcionView.vue')
+      component: () => import('../views/SubscripcionView.vue')
     },
     {
       path: '/noticias',
