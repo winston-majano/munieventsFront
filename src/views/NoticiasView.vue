@@ -7,7 +7,7 @@ import Prueba from '@/components/Prueba.vue';
 
 <template>
   <main>
-    <h1>Vista de noticiaas </h1>
+    <h1>Vista de noticias </h1>
     <Prueba/>
   </main>
 </template>

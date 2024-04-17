@@ -2,27 +2,21 @@
 import { RouterLink, RouterView } from 'vue-router'
 import EncabezadoLogo from './components/EncabezadoLogo.vue';
 import Footer from './components/Footer.vue';
+import NavBar from './components/NavBar.vue';
 </script>
 
 <template>
-  <header>
-    <EncabezadoLogo/>
-    <nav>
-      <RouterLink to="/">Inicio</RouterLink>
-      <RouterLink to="/noticias">Noticias</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/subscripcion">Subscripción</RouterLink>
-    </nav>
-  </header>
+  <EncabezadoLogo />
+  <NavBar />
 
+  <!-- Dentro de RouterView es donde se visualizan las vistas -->
   <RouterView />
 
   <Footer></Footer>
 </template>
 
 <style scoped>
-
-nav {
+/* nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
@@ -55,5 +49,5 @@ nav {
 
   padding: 1rem 0;
   margin-top: 1rem;
-}
+} */
 </style>
