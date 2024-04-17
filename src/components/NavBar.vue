@@ -19,16 +19,14 @@
                     <li class="nav-item">
                         <RouterLink to="/subscripcion" class="nav-link">Subscripción</RouterLink>
                     </li>
-                    <li class="nav-item">
-                        <RouterLink to="/login" class="nav-link">Login</RouterLink>
-                    </li>
                 </ul>
                 <!-- falta completar adecuadamente los action, etc -->
                 <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
                 <form class="form-inline my-2 my-lg-0 me-lg-5  ms-4" action="login.html" method="GET">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button>
+                    <!-- <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button> -->
+                    <button class="btn btn-outline-primary my-2 my-sm-0"><RouterLink to="/login" style="text-decoration: none;">Login</RouterLink></button>
                 </form>
             </div>
         </div>
