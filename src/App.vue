@@ -6,7 +6,7 @@ import Footer from './components/Footer.vue';
 
 <template>
   <header>
-    <EncabezadoLogo></EncabezadoLogo>
+    <EncabezadoLogo/>
     <nav>
       <RouterLink to="/">Inicio</RouterLink>
       <RouterLink to="/noticias">Noticias</RouterLink>
