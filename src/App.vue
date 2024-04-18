@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import EncabezadoLogo from './components/EncabezadoLogo.vue';
-import Footer from './components/Footer.vue';
+import FooterComponent from './components/FooterComponent.vue';
 import NavBar from './components/NavBar.vue';
 </script>
 
@@ -12,7 +12,7 @@ import NavBar from './components/NavBar.vue';
   <!-- Dentro de RouterView es donde se visualizan las vistas -->
   <RouterView />
 
-  <Footer></Footer>
+  <FooterComponent />
 </template>
 
 <style scoped>
