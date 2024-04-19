@@ -109,6 +109,7 @@
             </div>
         </div>
     </footer>
+    
 </template>
 
 <style scoped>

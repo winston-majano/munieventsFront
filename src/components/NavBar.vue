@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <RouterLink to="/subscripcion" class="nav-link">Subscripción</RouterLink>
                     </li>
+                    <li class="nav-item">
+                        <RouterLink to="/crearEvento" class="nav-link">Quieres crear un evento?</RouterLink>
+                    </li>
                 </ul>
                 <!-- falta completar adecuadamente los action, etc -->
                 <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">
