@@ -1,15 +1,18 @@
 <script setup>
-import LoginPruebaComp from '@/components/LoginPruebaComp.vue'
 import EncabezadoLogo from '@/components/EncabezadoLogo.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
+import NavBar from '@/components/NavBar.vue';
+
+
 </script>
 
 <template>
-    <header>
+  <header>
     <EncabezadoLogo />
+    <NavBar />
   </header>
   <main>
-    <LoginPruebaComp/>
+    <h1>Vista de noticias </h1>
   </main>
   <footer>
     <FooterComponent />
