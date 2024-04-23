@@ -4,6 +4,7 @@ import NewsComponent from '@/components/NewsComponent.vue'
 </script>
 
 <template>
+ 
   <h1>Contenido de la vista principal</h1>
  
 <div class="container">
