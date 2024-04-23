@@ -33,18 +33,19 @@
   <script setup>
   import { useIsLoggedStore } from '@/stores/isLogged';
   import { useRouter } from 'vue-router';
+  import { ref } from 'vue';
   
-  const email = null;
-  const password = null;
+  const email = ref(null);
+  const password = ref(null);
   const isLoggedStore = useIsLoggedStore();
   const router = useRouter();
   
   const handleLogin = async () => {
-    await isLoggedStore.login(email, password);
+    await isLoggedStore.login(email.value, password.value);
   
     console.log("Se ha iniciado el proceso de inicio de sesión.");
-    console.log('Email: ' + email);
-    console.log('Password: ' + password);
+    console.log('Email: ' + email.value);
+    console.log('Password: ' + password.value);
     
     if (isLoggedStore.isLoggedIn) {
       router.push('/');
