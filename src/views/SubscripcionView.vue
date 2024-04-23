@@ -1,4 +1,11 @@
+<script setup>
+import EncabezadoLogo from '@/components/EncabezadoLogo.vue';
+import FooterComponent from '@/components/FooterComponent.vue';
+import NavBar from '@/components/NavBar.vue';
+</script>
+
 <template>
+<<<<<<< HEAD
   <div class="container">
     <div class="section-title text-center">
                 <h1>Subscripción Trimestral</h1>
@@ -74,7 +81,21 @@
                     </div>
                 </div><!--- END COL -->			  
             </div><!--- END ROW -->
+=======
+  <header>
+    <EncabezadoLogo />
+    <NavBar />
+  </header>
+  <main>
+      <div class="container">
+    <h1>Contenido de la vista Suscripción</h1>
+>>>>>>> b0a6f5327fe87e9946d883616dfa754a68e9ed7a
   </div>
+  </main>
+
+  <footer>
+    <FooterComponent />
+  </footer>
 </template>
 
 <script setup>
