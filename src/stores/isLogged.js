@@ -5,8 +5,7 @@ export const useIsLoggedStore = defineStore('isLogged', () => {
     isLoggedIn: false,
     loginError: '',
     async login(email, password) {
-      console.log('Que hay dentro de email y password?? ')
-        console.log(email, password)
+      
       try {
         const response = await fetch('http://localhost:8080/api/v1/usersLogin', {
           method: 'POST',
@@ -15,15 +14,14 @@ export const useIsLoggedStore = defineStore('isLogged', () => {
           },
           body: JSON.stringify({ email, password })
         });
-        console.log('Por segunda vez..Que hay dentro de email y password??')
-        console.log('==>'+email, password)
-        console.log('hasta aquí funciona?')
+       
         const data = await response.json();
-        console.log('Que hay dentro de data?? '+data) 
+       
 
         if (response.ok) {
           if (data == 1) {
             this.isLoggedIn = true;
+            
             this.loginError = ''; 
           } else {
             this.isLoggedIn = false;

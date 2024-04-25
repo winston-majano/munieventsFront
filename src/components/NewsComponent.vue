@@ -2,12 +2,10 @@
     <div class="container noticia-container"> 
         <div class="noticia-description"> 
 
-            
               <img :src='news.imagen' alt="Imagen Noticia 1" class="img-fluid"> 
              <h2 class="text-center noticia-title" id="titulo">{{ news.titulo }}</h2> 
              <p class="image-caption"><span id="fotografo"></span> {{ news.noticia_redaccion }}</p> 
             
-    
             <p id="contenido"></p>
         </div>
     </div>
@@ -25,11 +23,9 @@ const news = ref({});
 fetch('https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
         news.value = data
     });
-// .then(data=> console.log("que hay dentro" + data.imagen))
-
 
    
 </script>

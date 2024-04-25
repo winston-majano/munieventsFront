@@ -32,6 +32,12 @@ const router = createRouter({
       name: 'crearEvento',
      
       component: () => import('../views/CrearEventoView.vue')
+    },
+    {
+      path: '/miCuenta',
+      name: 'miCuenta',
+     
+      component: () => import('../views/MiCuentaView.vue')
     }
   ]
 })
