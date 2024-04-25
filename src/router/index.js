@@ -19,7 +19,7 @@ const router = createRouter({
       path: '/noticias',
       name: 'noticias',
      
-      component: () => import('../views/NoticiasView.vue')
+      component: () => import('../views/NewsView.vue')
     },
     {
       path: '/login',

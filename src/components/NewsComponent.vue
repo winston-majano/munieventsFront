@@ -1,13 +1,13 @@
 <template>
+    <div class="container noticia-container"> 
+        <div class="noticia-description"> 
 
-    <div class="container noticia-container">
-        <!-- Descripción de la noticia -->
-        <div class="noticia-description">
-
-            <img :src="news.imagen" alt="Imagen Noticia 1" class="img-fluid">
-            <h2 class="text-center noticia-title" id="titulo">{{ news.titulo }}</h2>
-            <p class="image-caption"><span id="fotografo"></span> {{ news.noticia_redaccion }}</p>
+            <!--
+              <img :src='news.imagen' alt="Imagen Noticia 1" class="img-fluid"> -->
+             <h2 class="text-center noticia-title" id="titulo">{{ news.titulo }}</h2> 
+             <p class="image-caption"><span id="fotografo"></span> {{ news.noticia_redaccion }}</p> 
             
+    
             <p id="contenido"></p>
         </div>
     </div>
@@ -18,15 +18,12 @@
 
 import { ref } from 'vue';
 const news = ref(null);
-fetch('https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona/')
+fetch('https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona')
     .then(response => response.json())
     .then(data => news.value = data);
-
+// .then(data=> console.log("que hay dentro" + data.imagen))
    
 
-
- 
-    // URL de tu API
    
 </script>
 
