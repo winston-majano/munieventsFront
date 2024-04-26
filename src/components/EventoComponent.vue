@@ -22,10 +22,11 @@
 
 <script setup>
 import { ref } from 'vue';
-const events = ref(null);
+const events = ref({});
 fetch('https://ic2o8act3c.execute-api.us-east-1.amazonaws.com/pagina-de-inicio-eventos/pagina-de-inicio-eventos')
     .then(response => response.json())
     .then(data => events.value = data);
 
+//console.log(events.titulo_imagen);
 </script>
 

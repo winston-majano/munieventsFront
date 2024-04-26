@@ -48,8 +48,14 @@
     console.log('Password: ' + password.value);
     
     if (isLoggedStore.isLoggedIn) {
+      console.log('Estado de loggedIN ==> '+isLoggedStore.isLoggedIn);
       router.push('/');
     }
   };
+
+  const handleLogout = () => {
+  isLoggedStore.logout();
+  router.push('/noticias'); 
+};
   </script>
   

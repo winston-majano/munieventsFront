@@ -19,7 +19,7 @@ const router = createRouter({
       path: '/noticias',
       name: 'noticias',
      
-      component: () => import('../views/NoticiasView.vue')
+      component: () => import('../views/NewsView.vue')
     },
     {
       path: '/login',
@@ -32,6 +32,12 @@ const router = createRouter({
       name: 'crearEvento',
      
       component: () => import('../views/CrearEventoView.vue')
+    },
+    {
+      path: '/miCuenta',
+      name: 'miCuenta',
+     
+      component: () => import('../views/MiCuentaView.vue')
     }
   ]
 })

@@ -11,6 +11,10 @@
 
 
 
+              <img :src='news.imagen' alt="Imagen Noticia 1" class="img-fluid"> 
+             <h2 class="text-center noticia-title" id="titulo">{{ news.titulo }}</h2> 
+             <p class="image-caption"><span id="fotografo"></span> {{ news.noticia_redaccion }}</p> 
+            
             <p id="contenido"></p>
         </div>
     </div>
@@ -18,29 +22,21 @@
 </template>
 
 <script setup>
- 
-    // URL de tu API
-    const apiUrl = 'https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona/';
 
-    // Realizar la solicitud utilizando fetch
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        // Actualizar el contenido de la página con los datos obtenidos
-        // document.querySelector('.noticia-container img').src = data.imagen;
-        document.querySelector('#fotografo').textContent = `Foto de ${data.nombreFotografo}`;
-        document.querySelector('#titulo').textContent = data.titulo;
+import { ref } from 'vue';
 
-        // Estilizar la redacción
-        const contenidoElement = document.querySelector('#contenido');
-        contenidoElement.textContent = data.noticia_redaccion;
-        contenidoElement.style.textAlign = 'justify'; // Alineación justificada
-        contenidoElement.style.lineHeight = '1.9'; // Altura de línea
+const news = ref({});
 
-        // Resto del código (si es necesario)
-      })
-      .catch(error => console.error('Error al obtener datos:', error));
+//news.value = {titulo: "123456",  noticia_redaccion : "kkahsldhlakshdjabskcjbskjañcbñkshjdbvckajsbcvk.dsjcbvsajdbv-ksdnv-lkSDNVLKJsdbvk.SJDBV.Kdsjbvk.b"}
 
+fetch('https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona')
+    .then(response => response.json())
+    .then(data => {
+        // console.log(data)
+        news.value = data
+    });
+
+   
 </script>
 
 <style scoped>
