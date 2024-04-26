@@ -35,11 +35,19 @@ const handleLogout = () => {
                     <li class="nav-item">
                         <RouterLink to="/subscripcion" class="nav-link">Subscripción</RouterLink>
                     </li>
-                    <li class="nav-item" v-if="isLoggedStore.isLoggedIn">
-                        <RouterLink to="/miCuenta" class="nav-link">Mi Cuenta</RouterLink>
+                    <li class="nav-item dropdown" v-if="isLoggedStore.isLoggedIn">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Mi Cuenta
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Mis Eventos</a></li>
+                            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres crear un evento?</RouterLink>
+                        <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres
+                            crear un evento?</RouterLink>
                     </li>
                 </ul>
                 <!-- falta completar adecuadamente los action, etc -->
