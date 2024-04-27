@@ -1,5 +1,5 @@
 <template>
-   <h1>Formulario crear eventos</h1>
+   <h1>Formulario para crear eventos</h1>
 </template>
 
 <script setup>

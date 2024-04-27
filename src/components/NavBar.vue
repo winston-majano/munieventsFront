@@ -41,14 +41,20 @@ const handleLogout = () => {
                             Mi Cuenta
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Mis Eventos</a></li>
-                            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <RouterLink to="/crearEvento" class="nav-link">Crear un Evento</RouterLink>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <RouterLink to="/misEventos" class="nav-link">Mis Eventos</RouterLink>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <RouterLink to="/miPerfil" class="nav-link">Mi Perfil</RouterLink></a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                   <!-- <li class="nav-item">
                         <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres
                             crear un evento?</RouterLink>
-                    </li>
+                    </li>-->
                 </ul>
                 <!-- falta completar adecuadamente los action, etc -->
                 <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">

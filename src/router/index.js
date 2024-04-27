@@ -27,17 +27,30 @@ const router = createRouter({
      
       component: () => import('../views/LoginView.vue')
     },
+    
     {
-      path: '/crearEvento',
-      name: 'crearEvento',
-     
-      component: () => import('../views/CrearEventoView.vue')
-    },
-    {
-      path: '/miCuenta',
       name: 'miCuenta',
-     
-      component: () => import('../views/MiCuentaView.vue')
+      path: '/miCuenta',
+     // component: () => import('../views/MiCuentaView.vue'),
+      children: [
+        {
+          path: '/miPerfil',
+          name: 'miPerfil',
+          component: () => import('../views/MiPerfilView.vue')
+        },
+        {
+          path: '/misEventos',
+          name: 'misEventos',
+          component: () => import('../views/MisEventosView.vue')
+        }
+        ,
+        {
+          path: '/crearEvento',
+          name: 'crearEvento',
+          component: () => import('../views/CrearEventoView.vue')
+        }
+      ]
+
     }
   ]
 })
