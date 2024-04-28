@@ -12,26 +12,31 @@ const router = createRouter({
     {
       path: '/subscripcion',
       name: 'subscripcion',
-      
+
       component: () => import('../views/SubscripcionView.vue')
     },
     {
       path: '/noticias',
       name: 'noticias',
-     
+
       component: () => import('../views/NewsView.vue')
     },
     {
       path: '/login',
       name: 'login',
-     
+
       component: () => import('../views/LoginView.vue')
     },
-    
+    {
+      path: '/crearUsuario',
+      name: 'crearUsuario',
+
+      component: () => import('../views/CrearUsuarioView.vue')
+    },
     {
       name: 'miCuenta',
       path: '/miCuenta',
-     // component: () => import('../views/MiCuentaView.vue'),
+      // component: () => import('../views/MiCuentaView.vue'),
       children: [
         {
           path: '/miPerfil',

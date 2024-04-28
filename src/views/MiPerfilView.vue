@@ -6,12 +6,17 @@ import FooterComponent from '@/components/FooterComponent.vue';
 </script>
 
 <template>
-   <header>
+
+  <header>
     <EncabezadoLogo />
     <NavBar />
   </header>
-  <MiPerfilComponent/>
-   <footer>
+
+  <main>
+    <MiPerfilComponent />
+  </main>
+
+  <footer>
     <FooterComponent />
   </footer>
 
