@@ -23,10 +23,6 @@
                                 <a href="#"><img src="./img/gmail.jpg" alt="Correo Electrónico"></a>
                                 <a href="#"><img src="./img/facebook.jpg" alt="Facebook"></a>
                             </div>
-                            <!-- LOGIN
-                            <div class="text-center mt-2">
-                                <a href="login.html">¿Ya tienes una cuenta? Iniciar Sesión</a>
-                            </div>-->
                         </form>
                     </div>
                 </div>

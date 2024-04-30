@@ -35,22 +35,32 @@ const handleLogout = () => {
                     <li class="nav-item">
                         <RouterLink to="/subscripcion" class="nav-link">Subscripción</RouterLink>
                     </li>
-                    <li class="nav-item" v-if="isLoggedStore.isLoggedIn">
-                        <RouterLink to="/miCuenta" class="nav-link">Mi Cuenta</RouterLink>
+                    <li class="nav-item dropdown" v-if="isLoggedStore.isLoggedIn">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Mi Cuenta
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">
+                                <RouterLink to="/crearEvento" class="nav-link">Crear un Evento</RouterLink>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <RouterLink to="/misEventos" class="nav-link">Mis Eventos</RouterLink>
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <RouterLink to="/miPerfil" class="nav-link">Mi Perfil</RouterLink></a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres crear un evento?</RouterLink>
-                    </li>
+                    <!-- Esta parte ya se puede eliminar ¿NO? -->
+                   <!-- <li class="nav-item">
+                        <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres
+                            crear un evento?</RouterLink>
+                    </li>-->
                 </ul>
-                <!-- falta completar adecuadamente los action, etc -->
+                <!-- falta completar o borrar -->
                 <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-                <!-- <form class="form-inline my-2 my-lg-0 me-lg-5  ms-4" action="" method="GET">
-                    <button class="btn btn-outline-primary my-2 my-sm-0">
-                        <RouterLink to="/login" style="text-decoration: none;">Login</RouterLink>
-                    </button>
-                </form> -->
                 <form class="form-inline my-2 my-lg-0 me-lg-5  ms-4" action="" method="GET">
                     <button class="btn btn-outline-primary my-2 my-sm-0" v-if="!isLoggedStore.isLoggedIn">
                         <RouterLink to="/login" style="text-decoration: none;">Login</RouterLink>
