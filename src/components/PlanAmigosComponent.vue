@@ -32,7 +32,7 @@ import { ref } from 'vue';
 const subscription = ref([]);
 const PlanAmigos = ref([]);
 
-fetch('http://localhost:8080/api/v1/plans', { mode: 'cors' })
+fetch('http://localhost:8080/api/v1/plans')
     .then(response => response.json())
     .then(data => {
         console.log(data);

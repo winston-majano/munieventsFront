@@ -1,22 +1,14 @@
 <template>
 
-    <div class="container noticia-container">
-        <!-- Descripción de la noticia -->
-        <div class="noticia-description">
-
-            <!-- <img src="img/evento1.webp" alt="Imagen Noticia 1" class="img-fluid"> -->
-
-            <p class="image-caption"><span id="fotografo"></span></p>
-            <h2 class="text-center noticia-title" id="titulo"></h2>
-
-
-
-              <img :src='news.imagen' alt="Imagen Noticia 1" class="img-fluid"> 
-             <h2 class="text-center noticia-title" id="titulo">{{ news.titulo }}</h2> 
-             <p class="image-caption"><span id="fotografo"></span> {{ news.noticia_redaccion }}</p> 
-            
-            <p id="contenido"></p>
+    <div class="container">
+    <div class="row"  v-for="new1 in news" :key="new1.id">
+        <div class="col-12">
+              <img :src='new1.image_new' alt="Imagen Noticia 1" class="img-fluid">
+              <h2 class="text-center noticia-title" id="titulo">{{ new1.title }}</h2> 
+             <p> {{ new1.description }}</p> 
         </div>
+        </div>
+       
     </div>
 
 </template>
@@ -29,11 +21,12 @@ const news = ref({});
 
 //news.value = {titulo: "123456",  noticia_redaccion : "kkahsldhlakshdjabskcjbskjañcbñkshjdbvckajsbcvk.dsjcbvsajdbv-ksdnv-lkSDNVLKJsdbvk.SJDBV.Kdsjbvk.b"}
 
-fetch('https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona')
+fetch('http://localhost:8080/api/v1/news')
     .then(response => response.json())
     .then(data => {
         // console.log(data)
         news.value = data
+        console.log(data);
     });
 
    
@@ -72,32 +65,6 @@ fetch('https://s8egzniilh.execute-api.us-east-1.amazonaws.com/noticia_barcelona'
     font-style: italic;
 }
 
-.footer {
-    margin-top: 50px;
-}
-
-.footer-title-01 {
-    color: #007bff;
-}
-
-.footer-link-01 a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.footer-link-01 a:hover {
-    text-decoration: underline;
-}
-
-.footer-bottom {
-    margin-top: 20px;
-}
-
-.social-icons i {
-    font-size: 20px;
-    margin-right: 10px;
-    color: #ffffff;
-}
 
 .noticia-description {
     max-width: 1024px;

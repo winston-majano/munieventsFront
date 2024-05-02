@@ -3,12 +3,12 @@
                     <div class="card">
                         <div class="row">
                             <div class="col-md-4">
-                              <img :src='event.imagen' class="card-img img-fluid" alt={{event.titulo_imagen}}>
+                             <!-- <img :src='event.imagen' class="card-img img-fluid" alt={{event.titulo_imagen}}> -->
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{event.titulo_imagen}}</h5>
-                                    <p class="card-text">{{event.descripcion_breve}}</p>
+                                    <h5 class="card-title">{{event.title}}</h5>
+                                    <p class="card-text">{{event.description}}</p>
                                     <div class="valoracion">valoracion</div>
                                     <a href="#" class="btn btn-primary">Ver más</a>
                                 </div>
@@ -23,7 +23,7 @@
 <script setup>
 import { ref } from 'vue';
 const events = ref({});
-fetch('https://ic2o8act3c.execute-api.us-east-1.amazonaws.com/pagina-de-inicio-eventos/pagina-de-inicio-eventos')
+fetch('http://localhost:8080/api/v1/events')
     .then(response => response.json())
     .then(data => events.value = data);
 
