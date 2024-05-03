@@ -4,7 +4,7 @@ import { useIsLoggedStore } from '@/stores/isLogged';
 import { useRouter } from 'vue-router';
 
 const isLoggedStore = useIsLoggedStore();
-
+console.log(isLoggedStore.user)
 const router = useRouter();
 const showCard = ref(true); 
 const userDeleted = ref(false);
@@ -132,3 +132,10 @@ const volverInicio = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+img{
+  max-width: 150px;
+  max-height: 150px;
+}
+</style>

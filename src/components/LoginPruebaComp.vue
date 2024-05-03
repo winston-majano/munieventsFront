@@ -1,4 +1,3 @@
-
 <template>
   <div class="container my-5">
     <div class="row justify-content-center">
@@ -21,8 +20,8 @@
                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
               </div>
               <div class="text-center mt-2">
-                
-                <a class="mx-4 link" href="#">¿Olvidaste tu contraseña?</a> <RouterLink to="/crearUsuario" class="mx-4 link">Registrarse</RouterLink>
+                <a class="mx-4 link" href="#">¿Olvidaste tu contraseña?</a>
+                <RouterLink to="/crearUsuario" class="mx-4 link">Registrarse</RouterLink>
               </div>
             </form>
             <p v-if="isLoggedStore.loginError" class="text-danger mt-3">Error en el login</p>
@@ -64,14 +63,14 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-  .link {
-    color: black; 
-    text-decoration: none; 
-    transition: color 0.3s; 
+.link {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .link:hover {
-    color: blue; 
-    text-decoration: underline;
+  color: blue;
+  text-decoration: underline;
 }
 </style>
