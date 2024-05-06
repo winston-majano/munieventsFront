@@ -7,6 +7,7 @@ import NavBar from '@/components/NavBar.vue';
 
 
 <template>
+ 
    <header>
     <EncabezadoLogo />
     <NavBar />
