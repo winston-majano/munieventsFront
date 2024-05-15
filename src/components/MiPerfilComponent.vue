@@ -75,7 +75,7 @@ const volverInicio = () => {
     <div class="row justify-content-center">
       <div class="col-md-6" v-if="showCard">
         <div class="card border-primary bg-light shadow">
-          <img :src="isLoggedStore.user.image_user" class="card-img-top" alt="Imagen de usuario">
+          <img :src="isLoggedStore.user.image_user" class="img-fluid rounded-circle ms-5 mt-5" alt="Imagen de usuario">
           <div class="card-body">
             <h5 class="card-title text-center">{{ isLoggedStore.user.full_name }}</h5>
             <p class="card-text">
@@ -113,6 +113,10 @@ const volverInicio = () => {
                 <label for="phone" class="form-label">Teléfono:</label>
                 <input type="text" class="form-control" id="phone" v-model="isLoggedStore.user.phone">
               </div>
+              <!-- <div class="mb-3">
+                <label for="phone" class="form-label">Password:</label>
+                <input type="text" class="form-control" id="phone" v-model="isLoggedStore.user.password">
+              </div> -->
               <div class="text-center">
                 <button type="submit" class="btn btn-primary mx-1 my-2">Guardar</button>
                 <button type="button" class="btn btn-secondary mx-1 my-2" @click="toggleForm">Cancelar</button>
