@@ -21,7 +21,7 @@
                 <li>Asientos reservados</li>
                 <li>Para 2 personas</li>
             </ul>
-            <a href="#">¡Lo Quiero!</a>
+            <a href="https://www.paypal.com/signin">¡Lo Quiero!</a>
         </div>
     </div>
 </template>
@@ -79,6 +79,10 @@ fetch('http://localhost:8080/api/v1/plans')
     position: absolute;
 }
 
+span.price-label {
+    margin-top: -16px;
+}
+
 .price-head h2 {
     font-weight: 600;
     margin-bottom: 0px;
@@ -127,7 +131,7 @@ fetch('http://localhost:8080/api/v1/plans')
     display: inline-block;
     font-size: 16px;
     overflow: hidden;
-    padding: 10px 45px;
+    padding: 10px 35px;
     text-transform: capitalize;
     transition: all 0.3s ease 0s;
 }
