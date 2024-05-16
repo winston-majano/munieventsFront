@@ -11,10 +11,11 @@
                 <input type="email" class="form-control" id="email" v-model="email" placeholder="Correo electrónico"
                   required>
               </div>
-              <div class="mb-3">
+              <div class="mb-3 position-relative">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" v-model="password" placeholder="Contraseña"
+                <input :type="showPassword ? 'text' : 'password'" class="form-control" id="password" v-model="password" placeholder="Contraseña"
                   required>
+                <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" @click="togglePasswordVisibility" class="eye-icon"></i>
               </div>
               <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
@@ -24,13 +25,12 @@
                 <RouterLink to="/crearUsuario" class="mx-4 link">Registrarse</RouterLink>
               </div>
             </form>
-            <p v-if="isLoggedStore.loginError" class="text-danger mt-3">Error en el login</p>
+            <p v-if="isLoggedStore.loginError" class="text-danger mt-3 text-center">{{ isLoggedStore.loginError }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
@@ -42,24 +42,19 @@ const email = ref(null);
 const password = ref(null);
 const isLoggedStore = useIsLoggedStore();
 const router = useRouter();
+const showPassword = ref(false);
 
 const handleLogin = async () => {
   await isLoggedStore.login(email.value, password.value);
 
-  console.log("Se ha iniciado el proceso de inicio de sesión.");
-  console.log('Email: ' + email.value);
-  console.log('Password: ' + password.value);
-
   if (isLoggedStore.isLoggedIn) {
-    console.log('Estado de loggedIN ==> ' + isLoggedStore.isLoggedIn);
     router.push('/');
   }
 };
 
-// const handleLogout = () => {
-//   isLoggedStore.logout();
-//   router.push('/noticias');
-// };
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
 </script>
 
 <style scoped>
@@ -72,5 +67,17 @@ const handleLogin = async () => {
 .link:hover {
   color: blue;
   text-decoration: underline;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 74%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 </style>
