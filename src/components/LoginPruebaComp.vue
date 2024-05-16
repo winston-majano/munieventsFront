@@ -21,7 +21,7 @@
                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
               </div>
               <div class="text-center mt-2">
-                <a class="mx-4 link" href="#">¿Olvidaste tu contraseña?</a>
+                <RouterLink to="/recuperacion" class="mx-4 link">¿Olvidaste tu contraseña?</RouterLink>
                 <RouterLink to="/crearUsuario" class="mx-4 link">Registrarse</RouterLink>
               </div>
             </form>

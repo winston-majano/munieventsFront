@@ -16,6 +16,12 @@ const router = createRouter({
       component: () => import('../views/SubscripcionView.vue')
     },
     {
+      path: '/recuperacion',
+      name: 'recuperacion',
+
+      component: () => import('../views/RecuperarPasswordView.vue')
+    },
+    {
       path: '/noticias',
       name: 'noticias',
 
