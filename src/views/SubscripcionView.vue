@@ -6,6 +6,7 @@ import PlanBasicoComponent from '@/components/PlanBasicoComponent.vue';
 import PlanFamiliaComponent from '@/components/PlanFamiliaComponent.vue';
 import PlanAmigosComponent from '@/components/PlanAmigosComponent.vue';
 
+
 </script>
 
 <template>
