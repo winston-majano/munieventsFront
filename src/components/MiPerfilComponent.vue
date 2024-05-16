@@ -75,7 +75,9 @@ const volverInicio = () => {
     <div class="row justify-content-center">
       <div class="col-md-6" v-if="showCard">
         <div class="card border-primary bg-light shadow">
-          <img :src="isLoggedStore.user.image_user" class="img-fluid rounded-circle ms-5 mt-5" alt="Imagen de usuario">
+          <div class="bg-secondary d-flex justify-content-center align-items-center">
+            <img :src="isLoggedStore.user.image_user" class="rounded-circle my-4" alt="Imagen de usuario">
+          </div>
           <div class="card-body">
             <h5 class="card-title text-center">{{ isLoggedStore.user.full_name }}</h5>
             <p class="card-text">
@@ -139,7 +141,7 @@ const volverInicio = () => {
 
 <style scoped>
 img{
-  max-width: 150px;
-  max-height: 150px;
+  width: 100px;
+  height: 100px;
 }
 </style>

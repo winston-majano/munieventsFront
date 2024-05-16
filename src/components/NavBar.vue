@@ -51,6 +51,9 @@ const handleLogout = () => {
                                 <RouterLink to="/miPerfil" class="nav-link">Mi Perfil</RouterLink></a></li>
                         </ul>
                     </li>
+                    <li class="nav-item" v-if="isLoggedStore.isLoggedIn">
+                        <img :src="isLoggedStore.user.image_user" class="img-user" alt="Imagen de usuario">
+                    </li>
                     <!-- Esta parte ya se puede eliminar ¿NO? -->
                    <!-- <li class="nav-item">
                         <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres
@@ -74,3 +77,11 @@ const handleLogout = () => {
     </nav>
 
 </template>
+
+<style scoped>
+.img-user{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+</style>
