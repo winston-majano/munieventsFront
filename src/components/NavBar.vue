@@ -1,5 +1,4 @@
 <script setup>
-
 import { useIsLoggedStore } from '@/stores/isLogged';
 import { useRouter } from 'vue-router';
 
@@ -11,11 +10,9 @@ const handleLogout = () => {
     console.log('Estado de loggedIN ==> ' + isLoggedStore.isLoggedIn);
     router.push('/');
 };
-
 </script>
 
 <template>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"></a>
@@ -52,15 +49,9 @@ const handleLogout = () => {
                         </ul>
                     </li>
                     <li class="nav-item" v-if="isLoggedStore.isLoggedIn">
-                        <img :src="isLoggedStore.user.image_user" class="img-user" alt="Imagen de usuario">
+                        <img :src="`data:image/png;base64,${isLoggedStore.user.image_user}`" class="img-user" alt="Imagen de usuario">
                     </li>
-                    <!-- Esta parte ya se puede eliminar ¿NO? -->
-                   <!-- <li class="nav-item">
-                        <RouterLink :to="isLoggedStore.isLoggedIn ? '/crearEvento' : '/login'" class="nav-link">Quieres
-                            crear un evento?</RouterLink>
-                    </li>-->
                 </ul>
-                <!-- falta completar o borrar -->
                 <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
@@ -75,7 +66,6 @@ const handleLogout = () => {
             </div>
         </div>
     </nav>
-
 </template>
 
 <style scoped>

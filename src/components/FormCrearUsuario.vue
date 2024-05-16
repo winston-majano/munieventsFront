@@ -1,8 +1,6 @@
 <template>
   <div class="container mt-5">
-
     <div class="row justify-content-center">
-      <h2>Create User</h2>
       <div class="col-8 col-md-6">
         <form class="form-group" @submit.prevent="createUser" enctype="multipart/form-data">
           <div class="form-group">
@@ -37,9 +35,6 @@
           </div>
           
           <div class="form-group mt-1">
-            <!-- No se como se hace para subir archivos, lo dejo comentado -->
-            <!-- <label for="imageUser">Profile Image (Optional):</label>
-        <input type="file" id="imageUser" class="form-control-file"> -->
             <div>
               <button type="submit" class="btn btn-primary my-2">Create User</button>
             </div>
@@ -116,88 +111,6 @@ async function createUser() {
   }
 }
 </script> 
-
-<!-- <script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
-export default {
-
-
-  setup() {
-    const router = useRouter();
-    let  imgUser = ref('');
-
-    //funcion subir imagen 
-    function obtenerImagen(e) {
-      let file = e.target.files[0];
-     console.log(file)
-     // user.value.image_user = file;
-     console.log( file)
-      cargarImagen(file); 
-    }
-
-    function cargarImagen(file) {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        imgUser.value = e.target.result;
-        user.value.image_user = e.target.result;
-        console.log(e.target.result);
-      }
-      reader.readAsDataURL(file);
-    }
-
-    //objeto de usuario 
-    const user = ref({
-      full_name: '',
-      email: '',
-      phone: '',
-      alias: '',
-      password: '',
-      image_user: '',
-      qty_event_sub: 0
-    });
-    const successMessage = ref('');
-    const errorMessage = ref('');
-
-    async function createUser() {
-      try {
-        console.log(user.value.image_user);
-        const jsonData = JSON.stringify(user.value);
-
-        const response = await fetch('http://localhost:8080/api/v1/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: jsonData
-        });
-
-        const data = await response.json();
-
-        if (response.status === 200) {
-          successMessage.value = 'Usuario creado correctamente.';
-          router.push("/login")
-
-        } else {
-          errorMessage.value = 'Error al crear el usuario: ' + data.message;
-        }
-      } catch (error) {
-        errorMessage.value = 'Error al crear el usuario: ' + error.message;
-      }
-    }
-
-    return {
-      user,
-      successMessage,
-      errorMessage,
-      obtenerImagen,
-      imgUser,
-      createUser
-    };
-  } 
-};
-</script> -->
 
 <style scoped>
 

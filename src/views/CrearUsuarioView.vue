@@ -8,7 +8,6 @@ import FooterComponent from '@/components/FooterComponent.vue';
     <header>
         <EncabezadoLogo />
     </header>
-    <h1>formulario crear usuarios</h1>
     <FormCrearUsuario/>
     <footer>
         <FooterComponent />
