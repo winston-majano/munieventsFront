@@ -3,7 +3,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="col-md-4">
-                             <!-- <img :src='event.imagen' class="card-img img-fluid" alt={{event.titulo_imagen}}> -->
+                            <img :src='event.photo' class="card-img img-fluid" > 
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
