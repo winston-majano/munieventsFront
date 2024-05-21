@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useIsLoggedStore } from '@/stores/isLogged';
 import { useRouter } from 'vue-router';
 
 const isLoggedStore = useIsLoggedStore();
 const router = useRouter();
-const showCard = ref(true); 
+const showCard = ref(true);
 const userDeleted = ref(false);
 const userUpdated = ref(false);
 const imgUser = ref(`data:image/png;base64,${isLoggedStore.user.image_user}`);
@@ -15,6 +15,11 @@ const toggleForm = () => {
   userUpdated.value = false;
   userDeleted.value = false;
 }
+
+// Computed property para verificar si la imagen está disponible
+const hasImage = computed(() => {
+  return imgUser.value && imgUser.value !== 'data:image/png;base64,';
+});
 
 const obtenerImagen = (e) => {
   const file = e.target.files[0];
@@ -89,9 +94,10 @@ const volverInicio = () => {
   <div class="container my-3">
     <div class="row justify-content-center">
       <div class="col-md-6" v-if="showCard">
-        <div class="card border-primary bg-light shadow">
-          <div class="bg-secondary d-flex justify-content-center align-items-center">
-            <img :src="imgUser" class="rounded-circle my-4" alt="Imagen de usuario">
+        <div class="card border-gray shadow">
+          <div class="bg-secondary d-flex justify-content-center align-items-center p-4">
+            <img v-if="hasImage" :src="imgUser" class="rounded-circle m-4 text-white" alt="Imagen de usuario">
+            <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: white;"></i>
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">{{ isLoggedStore.user.full_name }}</h5>
@@ -110,12 +116,13 @@ const volverInicio = () => {
         </div>
       </div>
       <div class="col-md-6" v-else>
-        <div class="card border-primary bg-light shadow">
+        <div class="card border-gray bg-light shadow">
           <div class="card-body">
             <h5 class="card-title text-center">Editar Usuario</h5>
             <form @submit.prevent="saveUser">
               <div class="mb-3 text-center d-flex flex-column justify-content-center align-items-center">
-                <img id="imgUser" :src="imgUser" class="img-fluid rounded-circle" width="100" alt="">
+                <img v-if="hasImage" id="imgUser" :src="imgUser" class="img-fluid rounded-circle" width="100" alt="">
+                <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: gray;"></i>
                 <input type="file" id="imageUser" @change="obtenerImagen" class="form-control-file d-none">
                 <label for="imageUser" class="btn btn-secondary mt-2">Subir nueva foto</label>
               </div>
@@ -165,4 +172,3 @@ img {
   width: 100px;
 }
 </style>
-

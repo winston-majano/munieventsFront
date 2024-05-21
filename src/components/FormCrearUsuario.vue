@@ -3,7 +3,7 @@
     <div class="card m-2 shadow rounded">
       <div class="card-body">
         <div class="row justify-content-center">
-          <div class="col-10 col-md-8">
+          <div class="col-10 col-md-8 border-gray" >
             <form class="form-group" @submit.prevent="createUser" enctype="multipart/form-data">
               <div class="form-group text-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
