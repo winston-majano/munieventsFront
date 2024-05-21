@@ -1,3 +1,6 @@
+// Muestra del funcionamiento de pinia
+
+
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 

@@ -1,5 +1,5 @@
 <script setup>
-import LoginPruebaComp from '@/components/LoginPruebaComp.vue'
+import LoginUsuarioComponent from '@/components/LoginUsuarioComponent.vue'
 import EncabezadoLogo from '@/components/EncabezadoLogo.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 </script>
@@ -9,7 +9,7 @@ import FooterComponent from '@/components/FooterComponent.vue';
     <EncabezadoLogo />
   </header>
   <main>
-    <LoginPruebaComp/>
+    <LoginUsuarioComponent/>
   </main>
   <footer>
     <FooterComponent />

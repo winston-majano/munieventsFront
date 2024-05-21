@@ -105,7 +105,7 @@ async function createUser() {
       isLoggedStore.loginError=''; //Para que no se siga mostrando el mensaje de error en el login
       router.push("/login");
     } else if (response.status === 401) {
-      errorMessage.value = 'Error al crear el usuario: email no válido, ya existe en la base de datos.';
+      errorMessage.value = 'Error al crear el usuario: email no válido, ya existe.';
       successMessage.value = '';
     } else {
       // Intenta parsear el JSON solo si no es un estado 401
@@ -113,7 +113,7 @@ async function createUser() {
         const data = await response.json();
         errorMessage.value = `Error al crear el usuario: ${data.message}`;
       } catch (e) {
-        // Si no se puede parsear el JSON, muestra un mensaje de error genérico
+        // Si no se puede parsear el JSON, muestra un mensaje de error
         errorMessage.value = 'Error al crear el usuario: respuesta inesperada del servidor.';
       }
     }
