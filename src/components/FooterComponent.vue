@@ -1,5 +1,5 @@
 <template>
-    
+
     <footer class="bg-grey footer">
         <div class="footer-top py-8">
             <div class="container">
@@ -10,7 +10,7 @@
                                 <h5 class="text-white footer-title-01">MuniEvents</h5>
                                 <ul class="list-unstyled footer-link-01 m-0">
                                     <li>
-                                        <a class="text-white text-opacity-75" href="#">Sobre nosotros</a>
+                                        <a class="text-white text-opacity-75" href="/About">Sobre nosotros</a>
                                     </li>
                                     <li>
                                         <a class="text-white text-opacity-75" href="#">Blog</a>
@@ -55,7 +55,8 @@
                                             style="max-width: 100px; max-height: auto" />
                                     </li>
                                     <li>
-                                        <img src="@/img/ajuntament.cornellaimg.jpg" alt="Cartel ajuntament Cornellà del Llobregat"
+                                        <img src="@/img/ajuntament.cornellaimg.jpg"
+                                            alt="Cartel ajuntament Cornellà del Llobregat"
                                             style="max-width: 100px; max-height: auto" />
                                     </li>
                                 </ul>
@@ -68,12 +69,12 @@
                             tu próximo compra.
                         </h5>
                         <div>
-                            <form class="d-flex flex-row mb-2 p-1 bg-white input-group">
-                                <input type="email" class="form-control rounded border-0" placeholder="Tu email" />
-                                <button class="btn btn-secondary flex-shrink-0" type="submit">
-                                    Suscribete
-                                </button>
+                            <form @submit.prevent="submitForm" class="d-flex flex-row mb-2 p-1 bg-white input-group">
+                                <input type="email" v-model="email" class="form-control rounded border-0"
+                                    placeholder="Tu email" />
+                                <button class="btn btn-secondary flex-shrink-0" type="submit">Suscribete</button>
                             </form>
+                            <div v-html="message"></div>
                         </div>
                         <div class="social-icons text-center">
                             <a href="#"><i class="fab fa-facebook"></i></a>
@@ -109,66 +110,101 @@
             </div>
         </div>
     </footer>
-    
+
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            email: '',
+            message: ''
+        };
+    },
+    
+    methods: {
+        submitForm() {
+            this.message = `
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <h1>Gracias por contactar con nosotros <strong>✔</strong></h1>: <strong>${this.email}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+       
+      `;
+            this.email = '';
+        }
+    }
+};
+
+</script>
+
 <style scoped>
-.bg-grey{
+.bg-grey {
     background-color: #343a40;
 }
 
 .py-8 {
-padding-top: 3.5rem !important;
-padding-bottom: 3.5rem !important;
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
 }
 
 .footer-link-01 li+li {
-padding-top: 0.8rem;
+    padding-top: 0.8rem;
 }
 
 .footer-title-01 {
-font-size: 16px;
-margin: 0 0 20px;
-font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 20px;
+    font-weight: 600;
 }
 
 .footer-title-01 {
-font-size: 16px;
-margin: 0 0 20px;
-font-weight: 600
+    font-size: 16px;
+    margin: 0 0 20px;
+    font-weight: 600
 }
 
 .footer-link-01 li+li {
-padding-top: .8rem
+    padding-top: .8rem
 }
 
 @media (max-width: 991.98px) {
-.footer-link-01 li+li {
-    padding-top: .6rem
-}
+    .footer-link-01 li+li {
+        padding-top: .6rem
+    }
 }
 
 .footer-link-01 a {
-position: relative;
-display: inline-block;
-vertical-align: top
+    position: relative;
+    display: inline-block;
+    vertical-align: top
 }
 
 .footer-link-01 a:after {
-content: "";
-position: absolute;
-bottom: 0;
-left: auto;
-right: 0;
-width: 0;
-height: 1px;
-transition: ease all .35s;
-background: currentColor
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    width: 0;
+    height: 1px;
+    transition: ease all .35s;
+    background: currentColor
+}
+
+a {
+    text-decoration: none;
+}
+
+.social-icons.text-center {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
 }
 
 .footer-link-01 a:hover:after {
-left: 0;
-right: auto;
-width: 100%
+    left: 0;
+    right: auto;
+    width: 100%
 }
 </style>

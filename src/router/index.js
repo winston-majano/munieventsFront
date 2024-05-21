@@ -59,6 +59,12 @@ const router = createRouter({
           path: '/crearEvento',
           name: 'crearEvento',
           component: () => import('../views/CrearEventoView.vue')
+        },
+
+        {
+          path: '/About',
+          name: 'Sobre nosotros',
+          component: () => import('../views/SobreNosotrosView.vue')
         }
       ]
 
