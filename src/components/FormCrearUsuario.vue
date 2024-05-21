@@ -1,55 +1,62 @@
 <template>
   <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-8 col-md-6">
-        <form class="form-group" @submit.prevent="createUser" enctype="multipart/form-data">
-          <div class="form-group">
-            <img id="imgUser" :src="imgUser" class="img-fluid rounded-circle" width="200" alt="">
-            <input type="file" id="imageUser" @change="obtenerImagen" class="form-control-file">
-            <label for="imageUser" class="btn btn-primary">Subir foto</label>
-          </div>
+    <div class="card m-2 shadow rounded">
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <div class="col-10 col-md-8">
+            <form class="form-group" @submit.prevent="createUser" enctype="multipart/form-data">
+              <div class="form-group text-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                  <label for="imageUser" class="btn btn-primary btn-lg m-4">Subir foto</label>
+                  <img v-if="imgUser" id="imgUser" :src="imgUser" class="m-2" style="max-width: 200px;" alt="">
+                  <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: gray;"></i>
+                  <input type="file" id="imageUser" @change="obtenerImagen" class="form-control-file d-none">
+                </div>
+              </div>
 
-          <div class="form-group">
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" v-model="user.full_name" class="form-control" required>
-          </div>
+              <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" v-model="user.full_name" class="form-control" required>
+              </div>
 
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" v-model="user.email" class="form-control" required>
-          </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" v-model="user.email" class="form-control" required>
+              </div>
 
-          <div class="form-group">
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" v-model="user.phone" class="form-control" required>
-          </div>
+              <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" v-model="user.phone" class="form-control" required>
+              </div>
 
-          <div class="form-group">
-            <label for="alias">Username (Alias):</label>
-            <input type="text" id="alias" v-model="user.alias" class="form-control" required>
-          </div>
+              <div class="form-group">
+                <label for="alias">Username (Alias):</label>
+                <input type="text" id="alias" v-model="user.alias" class="form-control" required>
+              </div>
 
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" v-model="user.password" class="form-control" required>
-          </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" v-model="user.password" class="form-control" required>
+              </div>
 
-          <div class="form-group mt-1">
-            <div>
-              <button type="submit" class="btn btn-primary my-2">Create User</button>
-            </div>
-            <div v-if="successMessage" class="alert alert-success mt-3" role="alert">
-              {{ successMessage }}
-            </div>
-            <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
-              {{ errorMessage }}
-            </div>
+              <div class="form-group mt-4 text-center">
+                <button type="submit" class="btn btn-primary btn-block my-2">Create User</button>
+              </div>
+
+              <div v-if="successMessage" class="alert alert-success mt-3" role="alert">
+                {{ successMessage }}
+              </div>
+              <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
+                {{ errorMessage }}
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';
@@ -102,7 +109,7 @@ async function createUser() {
     // Verifica el estado de la respuesta antes de intentar parsear JSON
     if (response.ok) {
       successMessage.value = 'Usuario creado correctamente.';
-      isLoggedStore.loginError=''; //Para que no se siga mostrando el mensaje de error en el login
+      isLoggedStore.loginError = ''; //Para que no se siga mostrando el mensaje de error en el login
       router.push("/login");
     } else if (response.status === 401) {
       errorMessage.value = 'Error al crear el usuario: email no válido, ya existe.';
@@ -126,5 +133,13 @@ async function createUser() {
 <style scoped>
 #imageUser {
   display: none;
+}
+
+img {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+  box-shadow: 2px 2px 15px rgb(190, 183, 183);
+
 }
 </style>
