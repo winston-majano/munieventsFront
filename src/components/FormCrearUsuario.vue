@@ -7,9 +7,9 @@
             <form class="form-group" @submit.prevent="createUser" enctype="multipart/form-data">
               <div class="form-group text-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                  <label for="imageUser" class="btn btn-primary btn-lg m-4">Subir foto</label>
                   <img v-if="imgUser" id="imgUser" :src="imgUser" class="m-2" style="max-width: 200px;" alt="">
                   <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: gray;"></i>
+                  <label for="imageUser" class="btn btn-primary btn-lg m-4">Subir foto</label>
                   <input type="file" id="imageUser" @change="obtenerImagen" class="form-control-file d-none">
                 </div>
               </div>
