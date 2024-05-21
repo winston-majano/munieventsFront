@@ -1,13 +1,9 @@
 <script setup>
-import Prueba from '@/components/Prueba.vue';
-
+import NoticiaComponent from '@/components/NoticiaComponent.vue';
 
 
 </script>
 
 <template>
-  <main>
-    <h1>Vista de noticias </h1>
-    <Prueba/>
-  </main>
+<NoticiaComponent></NoticiaComponent>
 </template>
