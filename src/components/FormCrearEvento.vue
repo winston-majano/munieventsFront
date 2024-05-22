@@ -15,9 +15,6 @@
                <label for="imageEvent" class="btn btn-outline-info btn-lg btn-block    mt-1">Subir foto </label>
             </div>
 
-
-
-
             <div class="form-group  mb-3 col-12 col-md-12 col-lg-8">
                <label for="tituloEvent" class="form-label">Título:</label>
                <input type="text" class="form-control" id="tituloEvent" v-model="event.title">
@@ -43,36 +40,44 @@
                   </div>
                </div>
             </div>
+            <div class=" form-group mb-3 col-12 col-md-8 col-xl-8">
+               <label for="locationEvent" class="form-label">Direccion:</label>
+               <input type="text" class="form-control" id="locationEvent"
+                  v-model="event.location" />
+            </div>
 
             <div class=" form-group mb-3 col-12 col-md-8 col-lg-8">
                <div class="row">
-                  <div class="col-3"> <label for="eventPrice" class="form-label">Precio:</label></div>
+                  <div class="col-3"> 
+                     <label for="eventPrice" class="form-label">Precio:</label>
+                  </div>
                   <div class="col-9"> <input type="number" min="0" max="10000" class="form-control" id="eventPrice"
                         v-model="event.price">
                   </div>
                </div>
 
             </div>
-            <div class=" form-group col-12 mb-3 col-lg-8">
-               <select class="form-select form-select-lg mb-3">
-                  <option selected>Seleccione una Categoria</option>
-                  <option>A</option>
-                  <option>B</option>
-                  <option>C</option>
+            <div class=" form-group col-12 mb-3 col-lg-8 mb-5">
+               <label for="">Categoria: </label>
+               <select v-model="selected"    id="category" class="form-control">
+                  <option :value="null" disabled>Select a category</option>
+                  <option v-for="category in selectData" :key="category.id" v-bind:value="category.id">
+                     {{ category.description }}
+                  </option>
                </select>
-               <!--<span>Seleccionado: {{ selected }}</span> -->
+             <!--  <span>ha seleccionado: {{ selected }}</span> -->
             </div>
-            <div class=" form-group mb-3 form-check ">
+         <!--   <div class=" form-group mb-3 form-check ">
                <input type="checkbox" class="form-check-input" id="exampleCheck1">
                <a href="#"> <label class="form-check-label" for="exampleCheck1">Aceptar Terminos y condiciones para
                      crear eventos</label></a>
-            </div>
+            </div>-->
             <button type="submit" class=" form-group btn btn-primary btn-lg mb-3">Crear Evento</button>
             <div v-if="successMessage" class="alert alert-success mt-3" role="alert">
-              {{ successMessage }}
+               {{ successMessage }}
             </div>
             <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
-              {{ errorMessage }}
+               {{ errorMessage }}
             </div>
 
          </form>
@@ -91,7 +96,8 @@ import { useIsLoggedStore } from '@/stores/isLogged';
 const isLoggedStore = useIsLoggedStore();
 const router = useRouter();
 const imageEvent = ref('');
-//const selected = ref('');
+const selected = ref(null);
+const selectData = ref('');
 
 //obtener la fecha 
 let now = new Date();
@@ -103,11 +109,11 @@ const event = ref({
    description: '',
    start_date: '',
    end_date: '',
-   location: 'prueba de locacion',
+   location: '',
    price: 0,
    coins: 100,
    creation_date: now.toISOString(),
-   category_id: 1,
+   category_id: selected,
    user_id: isLoggedStore.user.id,
    photo: ''
 });
@@ -131,6 +137,27 @@ function cargarImagen(file) {
    reader.readAsDataURL(file);
 }
 
+// Esta funcion trae todas las categorias para mostrarlos en el control select
+const getCategory = async () => {
+
+   try {
+      const response = await fetch('http://localhost:8080/api/v1/category', {
+         method: 'GET'
+      });
+     // console.log("Obteniendo la categoria: ", response)
+      selectData.value = await response.json();
+      //console.log("Respuesta: ", selectData)
+
+
+   } catch (error) {
+      console.log("Error exception: ", error.message)
+
+   }
+}
+
+//llamando a categorias 
+getCategory();
+
 
 
 // Crear un nuevo evento 
@@ -143,29 +170,27 @@ const createEvent = async () => {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
-            
+
          },
          body: eventData
       });
-     // console.log("Respuesta antes de parseo JSON: ", response)
+      // console.log("Respuesta antes de parseo JSON: ", response)
       const data = await response.text();
       //console.log("Respuesta: ", data)
 
       if (response.ok) {
          successMessage.value = 'Evento creado correctamente.';
-         
+
          router.push("/misEventos");
       } else {
-         console.log("error del data: ",data.message);
+        // console.log("error del data: ", data.message);
          errorMessage.value = `Error al crear el evento: ${data.message}`;
       }
    } catch (error) {
-      console.log("Error exception: ",error.message)
+     // console.log("Error exception: ", error.message)
       errorMessage.value = `Error al crear el evento: ${error.message}`;
    }
 }
-
-
 
 
 
