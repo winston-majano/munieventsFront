@@ -9,30 +9,37 @@ const showCard = ref(true);
 const userDeleted = ref(false);
 const userUpdated = ref(false);
 const imgUser = ref(`data:image/png;base64,${isLoggedStore.user.image_user}`);
+let originalUserState = ref({ ...isLoggedStore.user });
 
 const toggleForm = () => {
   showCard.value = !showCard.value;
   userUpdated.value = false;
   userDeleted.value = false;
+  if (!showCard.value) {
+    originalUserState.value = { ...isLoggedStore.user };
+  } else {
+    Object.assign(isLoggedStore.user, originalUserState.value);
+    imgUser.value = `data:image/png;base64,${isLoggedStore.user.image_user}`;
+  }
 }
 
-// Computed property para verificar si la imagen está disponible
+// Propiedad calculada para verificar si la imagen está disponible
 const hasImage = computed(() => {
   return imgUser.value && imgUser.value !== 'data:image/png;base64,';
 });
 
 const obtenerImagen = (e) => {
-  const file = e.target.files[0];
-  cargarImagen(file);
+  const archivo = e.target.files[0];
+  cargarImagen(archivo);
 }
 
-const cargarImagen = (file) => {
+const cargarImagen = (archivo) => {
   const reader = new FileReader();
   reader.onload = (e) => {
     imgUser.value = e.target.result;
     isLoggedStore.user.image_user = e.target.result.split(',')[1]; // Guardar solo la parte base64
   }
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(archivo);
 }
 
 const saveUser = async () => {
@@ -121,7 +128,7 @@ const volverInicio = () => {
             <h5 class="card-title text-center">Editar Usuario</h5>
             <form @submit.prevent="saveUser">
               <div class="mb-3 text-center d-flex flex-column justify-content-center align-items-center">
-                <img v-if="hasImage" id="imgUser" :src="imgUser" class="img-fluid rounded-circle" width="100" alt="">
+                <img v-if="hasImage" id="imgUser" :src="imgUser" class="img-fluid round-circle" width="100" alt="">
                 <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: gray;"></i>
                 <input type="file" id="imageUser" @change="obtenerImagen" class="form-control-file d-none">
                 <label for="imageUser" class="btn btn-secondary mt-2">Subir nueva foto</label>
