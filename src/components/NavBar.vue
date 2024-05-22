@@ -49,7 +49,8 @@ const handleLogout = () => {
                         </ul>
                     </li>
                     <li class="nav-item" v-if="isLoggedStore.isLoggedIn">
-                        <img :src="`data:image/png;base64,${isLoggedStore.user.image_user}`" class="img-user" alt="Imagen de usuario">
+                        <img v-if="isLoggedStore.user.image_user" :src="`data:image/png;base64,${isLoggedStore.user.image_user}`" class="img-user" alt="Imagen de usuario">
+                        <i v-else class="fas fa-user-circle mt-1" style="font-size: 2rem; color: gray;"></i>
                     </li>
                 </ul>
                 <!-- <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">
