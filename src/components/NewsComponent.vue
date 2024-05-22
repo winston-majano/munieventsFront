@@ -11,7 +11,8 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ new1.title }}</h5>
                   <p class="card-text">{{ new1.description.substring(0, 100) }}...</p>
-                  <button @click="showModal(new1)" class="btn btn-primary">Leer más</button>
+                  <!-- Condición para mostrar el botón Leer más -->
+                  <button v-if="showReadMoreButton" @click="showModal(new1)" class="btn btn-primary">Leer más</button>
                 </div>
               </div>
             </div>
@@ -40,13 +41,16 @@
     </div>
   </template>
   
-  
-  
   <script setup>
   import { ref } from 'vue';
-  
   const news = ref([]);
   const modalData = ref({});
+  
+  // Determinar la página actual
+  const currentPage = window.location.pathname;
+  
+  // Variable para determinar si se debe mostrar el botón Leer más
+  const showReadMoreButton = ref(currentPage === '/noticias');
   
   fetch('http://localhost:8080/api/v1/news')
     .then(response => response.json())
@@ -62,36 +66,35 @@
   };
   </script>
   
-
+  <style scoped>
+  .card {
+    display: flex;
+    margin-bottom: 20px;
+  }
   
-<style scoped>
-.card {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.fixed-size-image {
-  width: 100%;
-  height: 200px; /* Ajusta este valor según el tamaño deseado */
-  object-fit: cover;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.card-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.card-text {
-  flex-grow: 1;
-}
-
-.btn {
-  align-self: flex-start;
-}
-</style>
+  .fixed-size-image {
+    width: 100%;
+    height: 200px; /* Ajusta este valor según el tamaño deseado */
+    object-fit: cover;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card-text {
+    flex-grow: 1;
+  }
+  
+  .btn {
+    align-self: flex-start;
+  }
+  </style>
+  
