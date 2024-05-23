@@ -69,7 +69,7 @@
                             tu próximo compra.
                         </h5>
                         <div>
-                            <form @submit.prevent="submitForm" class="d-flex flex-row mb-2 p-1 bg-white input-group">
+                            <form @submit.prevent="submitForm()" class="d-flex flex-row mb-2 p-1 bg-white input-group">
                                 <input type="email" v-model="email" class="form-control rounded border-0"
                                     placeholder="Tu email" />
                                 <button class="btn btn-secondary flex-shrink-0" type="submit">Suscribete</button>
@@ -113,29 +113,21 @@
 
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            email: '',
-            message: ''
-        };
-    },
-    
-    methods: {
-        submitForm() {
-            this.message = `
+<script setup>
+import {ref} from 'vue';
+const email = ref('');
+const message = ref('');
+
+function submitForm() {
+    message.value = `
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <h1>Gracias por contactar con nosotros <strong>✔</strong></h1>: <strong>${this.email}</strong>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
        
       `;
-            this.email = '';
-        }
-    }
-};
-
+    email.value = '';
+}
 </script>
 
 <style scoped>
