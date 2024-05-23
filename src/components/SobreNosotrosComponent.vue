@@ -40,7 +40,7 @@
             <li>Github <i class="fa-brands fa-github"></i></li>
             <li>Trello <i class="fa-brands fa-trello" style="color: #3897F1;"></i></li>
             <li>Figma <img src="../img/figma.png" alt=""></li>
-            <li>Vscode <img src="../img/estudio-visual.png" alt=""></li>
+            <li>Vscode <img src="../img/vscode.png" alt=""></li>
           </ul>
         </div>
       </div>
