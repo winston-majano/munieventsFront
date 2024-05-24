@@ -39,7 +39,7 @@
             <img :src="modalData.image_new" class="img-fluid mb-3" alt="Imagen Noticia">
             <p>{{ modalData.description }}</p>
           </div>
-          <!-- Botón Cerrar -->
+          <!-- Botón Cerrar el pop up-->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" @click="closeModal">Cerrar</button>
           </div>
