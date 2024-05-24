@@ -4,15 +4,20 @@
       <div class="col-12" v-for="new1 in news" :key="new1.id">
         <div class="card mb-4">
           <div class="row g-0">
-            <div class="col-md-4">
-              <img :src="new1.image_new" class="img-fluid fixed-size-image" alt="Imagen Noticia 1">
+            <div class="col-md-4 d-flex justify-content-center align-items-center" v-if="paginaInicio">
+              <img :src="new1.image_new" class="img-fluid small-square-image rounded-image" alt="Imagen Noticia 1">
+            </div>
+            <div class="col-md-4" v-else>
+              <img :src="new1.image_new" class="img-fluid fixed-size-image rounded-image" alt="Imagen Noticia 1">
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ new1.title }}</h5>
-                <p class="card-text" v-if="paginaInicio">{{ new1.description.substring(0, 50) }}...</p>
-
-                <p class="card-text" v-if="showReadMoreButton" >{{ new1.description.substring(0, 100) }}...</p>
+                <h5 :class="{'small-title': paginaInicio}" class="card-title">{{ new1.title }}</h5>
+                <div v-if="paginaInicio">
+                  <span class="badge bg-primary">Categoría 1</span>
+                  <span class="badge bg-secondary">Categoría 2</span>
+                </div>
+                <p class="card-text" v-if="showReadMoreButton">{{ new1.description.substring(0, 100) }}...</p>
                 <!-- Condición para mostrar el botón Leer más -->
                 <button v-if="showReadMoreButton" @click="showModal(new1)" class="btn btn-primary">Leer más</button>
               </div>
@@ -50,10 +55,10 @@ import { ref } from 'vue';
 const news = ref([]);
 const modalData = ref({});
 
-// Determinar la página actual
+// con eso sabemos en que localizacion de la pagina estamos
 const currentPage = window.location.pathname;
 
-// Variable para determinar si se debe mostrar el botón Leer más
+// esto es para hacer que el boton no se muestre si esta en una pagina diferente a noticia
 const showReadMoreButton = ref(currentPage === '/noticias');
 const paginaInicio = currentPage !== '/noticias';
 
@@ -92,10 +97,21 @@ const closeModal = () => {
   margin-bottom: 20px;
 }
 
+.small-square-image {
+  width: 100px;
+  height: 100px; 
+  object-fit: cover;
+}
+
 .fixed-size-image {
   width: 100%;
-  height: 200px; /* Ajusta este valor según el tamaño deseado */
+  height: 200px; 
   object-fit: cover;
+}
+
+/* redondea la imagen */
+.rounded-image {
+  border-radius: 10px; 
 }
 
 .card-body {
@@ -115,5 +131,15 @@ const closeModal = () => {
 
 .btn {
   align-self: flex-start;
+}
+
+.badge {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/*título más pequeño para la pagina de inicio */
+.small-title {
+  font-size: 1rem; 
 }
 </style>
