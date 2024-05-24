@@ -18,7 +18,7 @@
 import { ref } from 'vue';
 import { useIsLoggedStore } from '@/stores/isLogged';
 
-
+/// comentario de prueba 
 
 const isLoggedStore = useIsLoggedStore();
 const eventsData = ref('');
