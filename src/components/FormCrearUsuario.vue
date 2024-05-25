@@ -63,6 +63,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useIsLoggedStore } from '@/stores/isLogged';
 
+// Comentario de prueba
+
 const router = useRouter();
 const imgUser = ref('');
 const user = ref({
