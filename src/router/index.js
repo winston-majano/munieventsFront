@@ -53,8 +53,13 @@ const router = createRouter({
           path: '/misEventos',
           name: 'misEventos',
           component: () => import('../views/MisEventosView.vue')
-        }
-        ,
+        },
+        {
+          path: '/detailEvento/:id',
+          name: 'detailEvento',
+          component: () => import('../views/EventDetailView.vue')
+        },
+
         {
           path: '/crearEvento',
           name: 'crearEvento',
