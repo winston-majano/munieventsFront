@@ -57,13 +57,10 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useIsLoggedStore } from '@/stores/isLogged';
-
-// Comentario de prueba
 
 const router = useRouter();
 const imgUser = ref('');
@@ -73,7 +70,6 @@ const user = ref({
   phone: '',
   alias: '',
   password: '',
-  image_user: '',
   qty_event_sub: 0
 });
 const successMessage = ref('');
@@ -82,49 +78,38 @@ const isLoggedStore = useIsLoggedStore();
 
 function obtenerImagen(e) {
   const file = e.target.files[0];
-  console.log(`que hay en imagen?? : ${file}`);
-  cargarImagen(file);
-}
-
-function cargarImagen(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
     imgUser.value = e.target.result;
-    user.value.image_user = e.target.result.split(',')[1]; // Aquí se guarda solo la parte base64
   }
   reader.readAsDataURL(file);
 }
 
-
 async function createUser() {
   try {
-    console.log(user.value.image_user);
-    const jsonData = JSON.stringify(user.value);
+    const formData = new FormData();
+    formData.append('full_name', user.value.full_name);
+    formData.append('email', user.value.email);
+    formData.append('phone', user.value.phone);
+    formData.append('alias', user.value.alias);
+    formData.append('password', user.value.password);
+    formData.append('image_user', document.getElementById('imageUser').files[0]);
+
     const response = await fetch('http://localhost:8080/api/v1/users', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: jsonData
+      body: formData
     });
 
-    // Verifica el estado de la respuesta antes de intentar parsear JSON
     if (response.ok) {
       successMessage.value = 'Usuario creado correctamente.';
-      isLoggedStore.loginError = ''; //Para que no se siga mostrando el mensaje de error en el login
+      isLoggedStore.loginError = '';
       router.push("/login");
     } else if (response.status === 401) {
       errorMessage.value = 'Error al crear el usuario: email no válido, ya existe.';
       successMessage.value = '';
     } else {
-      // Intenta parsear el JSON solo si no es un estado 401
-      try {
-        const data = await response.json();
-        errorMessage.value = `Error al crear el usuario: ${data.message}`;
-      } catch (e) {
-        // Si no se puede parsear el JSON, muestra un mensaje de error
-        errorMessage.value = 'Error al crear el usuario: respuesta inesperada del servidor.';
-      }
+      const data = await response.json();
+      errorMessage.value = `Error al crear el usuario: ${data.message}`;
     }
   } catch (error) {
     errorMessage.value = `Error al crear el usuario: ${error.message}`;
@@ -142,6 +127,5 @@ img {
   height: 120px;
   border-radius: 60px;
   box-shadow: 2px 2px 15px rgb(190, 183, 183);
-
 }
 </style>

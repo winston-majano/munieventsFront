@@ -38,6 +38,8 @@ import { useIsLoggedStore } from '@/stores/isLogged';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
+
+
 const email = ref(null);
 const password = ref(null);
 const isLoggedStore = useIsLoggedStore();
