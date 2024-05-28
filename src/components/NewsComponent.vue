@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12" v-for="new1 in news" :key="new1.id">
+      <div class="col-12" v-for="(new1, index) in orderedNews" :key="new1.id">
         <div class="card mb-4">
           <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center" v-if="paginaInicio">
@@ -14,11 +14,9 @@
               <div class="card-body">
                 <h5 :class="{'small-title': paginaInicio}" class="card-title">{{ new1.title }}</h5>
                 <div v-if="paginaInicio">
-                  <span class="badge bg-primary">Categoría 1</span>
-                  <span class="badge bg-secondary">Categoría 2</span>
+                  <span v-if="index < 3" class="badge bg-primary red-badge">¡Nuevo!</span>
                 </div>
                 <p class="card-text" v-if="showReadMoreButton">{{ new1.description.substring(0, 100) }}...</p>
-                <!-- Condición para mostrar el botón Leer más -->
                 <button v-if="showReadMoreButton" @click="showModal(new1)" class="btn btn-primary">Leer más</button>
               </div>
             </div>
@@ -39,7 +37,7 @@
             <img :src="modalData.image_new" class="img-fluid mb-3" alt="Imagen Noticia">
             <p>{{ modalData.description }}</p>
           </div>
-          <!-- Botón Cerrar el pop up-->
+          <!-- Botón Cerrar -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" @click="closeModal">Cerrar</button>
           </div>
@@ -50,24 +48,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const news = ref([]);
 const modalData = ref({});
 
-// con eso sabemos en que localizacion de la pagina estamos
+// Aqui indicamos la pag actual en la que nos encontramos
 const currentPage = window.location.pathname;
 
-// esto es para hacer que el boton no se muestre si esta en una pagina diferente a noticia
+// Esto nos dice si se debe de mostrar el boton de leer mas 
 const showReadMoreButton = ref(currentPage === '/noticias');
 const paginaInicio = currentPage !== '/noticias';
 
+// Fetch de las noticias
 fetch('http://localhost:8080/api/v1/news')
   .then(response => response.json())
   .then(data => {
-    news.value = data;
+    // con esto organizamos por id las noticias, de mas antiguas a mas nuevas
+    news.value = data.sort((a, b) => new Date(b.id) - new Date(a.id));
     console.log(data);
   });
+
+const orderedNews = computed(() => {
+  return news.value;
+});
 
 let myModalInstance = null;
 
@@ -88,7 +92,6 @@ const closeModal = () => {
     console.error('Error al intentar cerrar el modal:', error);
   }
 };
-
 </script>
 
 <style scoped>
@@ -98,7 +101,7 @@ const closeModal = () => {
 }
 
 .small-square-image {
-  width: 100px;
+  width: 100px; 
   height: 100px; 
   object-fit: cover;
 }
@@ -109,7 +112,6 @@ const closeModal = () => {
   object-fit: cover;
 }
 
-/* redondea la imagen */
 .rounded-image {
   border-radius: 10px; 
 }
@@ -138,8 +140,25 @@ const closeModal = () => {
   margin-bottom: 0.5rem;
 }
 
-/*título más pequeño para la pagina de inicio */
+
 .small-title {
   font-size: 1rem; 
+}
+
+
+.red-badge {
+  background-color: red !important; 
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
 }
 </style>
