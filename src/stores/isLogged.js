@@ -40,7 +40,7 @@ export const useIsLoggedStore = defineStore('isLogged', () => {
 
   const logout = () => {
     isLoggedIn.value = false;
-    user.value = null;
+    user.value = '';
     loginError.value = '';
   };
 

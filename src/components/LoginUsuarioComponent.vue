@@ -58,9 +58,6 @@ const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
-// onMounted(() => {
-//   isLoggedStore.loginError = ''; 
-// });
 </script>
 
 <style scoped>

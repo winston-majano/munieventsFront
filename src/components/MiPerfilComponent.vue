@@ -16,7 +16,8 @@
               <span class="fw-bold ms-5">Email:</span> {{ isLoggedStore.user.email }}
               <br>
               <span class="fw-bold ms-5">Teléfono:</span> {{ isLoggedStore.user.phone }} <br>
-              <span class="fw-bold ms-5">Eventos suscritos:</span> {{ isLoggedStore.user.qty_event_sub }}
+              <!-- Dejar comentado, futura implementación -->
+              <!-- <span class="fw-bold ms-5">Eventos suscritos:</span> {{ isLoggedStore.user.qty_event_sub }} -->
             </p>
             <div class="text-center">
               <button type="button" class="btn btn-primary" @click="toggleForm">Editar/Eliminar</button>
@@ -152,7 +153,7 @@ const deleteUser = async () => {
       console.log(`como está userDeleted?? ${userDeleted.value}`)
       setTimeout(() => {
         router.push('/');
-      }, 2000); 
+      }, 4000); 
     } else {
       throw new Error('Error al eliminar el perfil');
     }
