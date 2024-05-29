@@ -1,17 +1,3 @@
-<script setup>
-import { useIsLoggedStore } from '@/stores/isLogged';
-import { useRouter } from 'vue-router';
-
-const isLoggedStore = useIsLoggedStore();
-const router = useRouter();
-
-const handleLogout = () => {
-    isLoggedStore.logout();
-    console.log('Estado de loggedIN ==> ' + isLoggedStore.isLoggedIn);
-    router.push('/');
-};
-</script>
-
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -49,13 +35,10 @@ const handleLogout = () => {
                         </ul>
                     </li>
                     <li class="nav-item" v-if="isLoggedStore.isLoggedIn">
-                        <img v-if="isLoggedStore.user.image_user" :src="`data:image/png;base64,${isLoggedStore.user.image_user}`" class="img-user" alt="Imagen de usuario">
+                        <img v-if="isLoggedStore.user.image_user" :src="getImageUrl(isLoggedStore.user.image_user)" class="img-user" alt="Imagen de usuario">
                         <i v-else class="fas fa-user-circle mt-1" style="font-size: 2rem; color: gray;"></i>
                     </li>
                 </ul>
-                <!-- <form class="form-inline my-2 my-lg-0  ms-4" action="buscadorsinlogear.html" method="GET">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                </form> -->
                 <form class="form-inline my-2 my-lg-0 me-lg-5  ms-4" action="" method="GET">
                     <button class="btn btn-outline-primary my-2 my-sm-0" v-if="!isLoggedStore.isLoggedIn">
                         <RouterLink to="/login" style="text-decoration: none;">Login</RouterLink>
@@ -68,6 +51,24 @@ const handleLogout = () => {
         </div>
     </nav>
 </template>
+
+<script setup>
+import { useIsLoggedStore } from '@/stores/isLogged';
+import { useRouter } from 'vue-router';
+
+const isLoggedStore = useIsLoggedStore();
+const router = useRouter();
+
+const getImageUrl = (imagePath) => {
+  return `http://localhost:8080/uploads/${imagePath}`;
+}
+
+const handleLogout = () => {
+    isLoggedStore.logout();
+    console.log('Estado de loggedIN ==> ' + isLoggedStore.isLoggedIn);  
+    router.push('/');
+};
+</script>
 
 <style scoped>
 .img-user{

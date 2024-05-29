@@ -1,101 +1,3 @@
-<script setup>
-import { ref, computed } from 'vue';
-import { useIsLoggedStore } from '@/stores/isLogged';
-import { useRouter } from 'vue-router';
-
-const isLoggedStore = useIsLoggedStore();
-const router = useRouter();
-const showCard = ref(true);
-const userDeleted = ref(false);
-const userUpdated = ref(false);
-const imgUser = ref(`data:image/png;base64,${isLoggedStore.user.image_user}`);
-let originalUserState = ref({ ...isLoggedStore.user });
-
-const toggleForm = () => {
-  showCard.value = !showCard.value;
-  userUpdated.value = false;
-  userDeleted.value = false;
-  if (!showCard.value) {
-    originalUserState.value = { ...isLoggedStore.user };
-  } else {
-    Object.assign(isLoggedStore.user, originalUserState.value);
-    imgUser.value = `data:image/png;base64,${isLoggedStore.user.image_user}`;
-  }
-}
-
-// Propiedad calculada para verificar si la imagen está disponible
-const hasImage = computed(() => {
-  return imgUser.value && imgUser.value !== 'data:image/png;base64,';
-});
-
-const obtenerImagen = (e) => {
-  const archivo = e.target.files[0];
-  cargarImagen(archivo);
-}
-
-const cargarImagen = (archivo) => {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    imgUser.value = e.target.result;
-    isLoggedStore.user.image_user = e.target.result.split(',')[1]; // Guardar solo la parte base64
-  }
-  reader.readAsDataURL(archivo);
-}
-
-const saveUser = async () => {
-  try {
-    const userPayload = {
-      full_name: isLoggedStore.user.full_name,
-      alias: isLoggedStore.user.alias,
-      email: isLoggedStore.user.email,
-      phone: isLoggedStore.user.phone,
-      image_user: imgUser.value.split(',')[1] // Enviar solo la parte base64
-    };
-
-    const response = await fetch(`http://localhost:8080/api/v1/users/${isLoggedStore.user.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userPayload)
-    });
-
-    if (response.ok) {
-      userUpdated.value = true;
-      showCard.value = true;
-    } else {
-      throw new Error('Error al actualizar el usuario');
-    }
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-const deleteUser = async () => {
-  try {
-    const response = await fetch(`http://localhost:8080/api/v1/users/${isLoggedStore.user.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-      console.log('Perfil eliminado con éxito');
-      isLoggedStore.isLoggedIn = false;
-      userDeleted.value = true;
-    } else {
-      throw new Error('Error al eliminar el perfil');
-    }
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-const volverInicio = () => {
-  router.push('/')
-}
-</script>
 
 <template>
   <div class="container my-3">
@@ -103,7 +5,7 @@ const volverInicio = () => {
       <div class="col-md-6" v-if="showCard">
         <div class="card border-gray shadow">
           <div class="bg-secondary d-flex justify-content-center align-items-center p-4">
-            <img v-if="hasImage" :src="imgUser" class="rounded-circle m-4 text-white" alt="Imagen de usuario">
+            <img v-if="isLoggedStore.user.image_user" :src="getImageUrl(isLoggedStore.user.image_user)" class="rounded-circle m-4 text-white" alt="Imagen de usuario">
             <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: white;"></i>
           </div>
           <div class="card-body">
@@ -114,7 +16,8 @@ const volverInicio = () => {
               <span class="fw-bold ms-5">Email:</span> {{ isLoggedStore.user.email }}
               <br>
               <span class="fw-bold ms-5">Teléfono:</span> {{ isLoggedStore.user.phone }} <br>
-              <span class="fw-bold ms-5">Eventos suscritos:</span> {{ isLoggedStore.user.qty_event_sub }}
+              <!-- Dejar comentado, futura implementación -->
+              <!-- <span class="fw-bold ms-5">Eventos suscritos:</span> {{ isLoggedStore.user.qty_event_sub }} -->
             </p>
             <div class="text-center">
               <button type="button" class="btn btn-primary" @click="toggleForm">Editar/Eliminar</button>
@@ -128,7 +31,8 @@ const volverInicio = () => {
             <h5 class="card-title text-center">Editar Usuario</h5>
             <form @submit.prevent="saveUser">
               <div class="mb-3 text-center d-flex flex-column justify-content-center align-items-center">
-                <img v-if="hasImage" id="imgUser" :src="imgUser" class="img-fluid round-circle" width="100" alt="">
+                <img v-if="imgUser" :src="imgUser" class="img-fluid rounded-circle" width="100" alt="">
+                <img v-else-if="isLoggedStore.user.image_user" :src="getImageUrl(isLoggedStore.user.image_user)" class="img-fluid rounded-circle" width="100" alt="">
                 <i v-else class="fas fa-user-circle" style="font-size: 4rem; color: gray;"></i>
                 <input type="file" id="imageUser" @change="obtenerImagen" class="form-control-file d-none">
                 <label for="imageUser" class="btn btn-secondary mt-2">Subir nueva foto</label>
@@ -143,7 +47,7 @@ const volverInicio = () => {
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" v-model="isLoggedStore.user.email">
+                <input type="email" class="form-control" id="email" v-model="isLoggedStore.user.email" readonly>
               </div>
               <div class="mb-3">
                 <label for="phone" class="form-label">Teléfono:</label>
@@ -161,6 +65,7 @@ const volverInicio = () => {
                 ¡Usuario eliminado con éxito!
                 <button class="btn btn-primary mt-3" @click="volverInicio">Volver a inicio</button>
               </div>
+              
             </form>
           </div>
         </div>
@@ -168,6 +73,99 @@ const volverInicio = () => {
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import { useIsLoggedStore } from '@/stores/isLogged';
+import { useRouter } from 'vue-router';
+
+const isLoggedStore = useIsLoggedStore();
+const router = useRouter();
+const showCard = ref(true);
+const userDeleted = ref(false);
+const userUpdated = ref(false);
+const imgUser = ref('');
+
+const toggleForm = () => {
+  showCard.value = !showCard.value;
+  userUpdated.value = false;
+  userDeleted.value = false;
+}
+
+const getImageUrl = (imagePath) => {
+  return `http://localhost:8080/uploads/${imagePath}`;
+}
+
+const obtenerImagen = (e) => {
+  const archivo = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    imgUser.value = e.target.result;
+  }
+  reader.readAsDataURL(archivo);
+}
+
+const saveUser = async () => {
+  try {
+    const formData = new FormData();
+    formData.append('full_name', isLoggedStore.user.full_name);
+    formData.append('alias', isLoggedStore.user.alias);
+    formData.append('email', isLoggedStore.user.email);
+    formData.append('phone', isLoggedStore.user.phone);
+    const imageFile = document.getElementById('imageUser').files[0];
+    if (imageFile) {
+      formData.append('image_user', imageFile);
+    }
+
+    const response = await fetch(`http://localhost:8080/api/v1/users/${isLoggedStore.user.id}`, {
+      method: 'PUT',
+      body: formData
+    });
+
+    if (response.ok) {
+      const updatedUser = await response.json();
+      isLoggedStore.setUser(updatedUser);
+      imgUser.value = '';
+      userUpdated.value = true;
+      showCard.value = true;
+    } else {
+      console.error('Error al actualizar el usuario');
+      userUpdated.value = false;
+    }
+  } catch (error) {
+    console.error('Error al actualizar el usuario:', error);
+  }
+}
+
+const deleteUser = async () => {
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/users/${isLoggedStore.user.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log('Perfil eliminado con éxito');
+      isLoggedStore.logout();
+      userDeleted.value = true;
+      console.log(`como está userDeleted?? ${userDeleted.value}`)
+      setTimeout(() => {
+        router.push('/');
+      }, 4000); 
+    } else {
+      throw new Error('Error al eliminar el perfil');
+    }
+  } catch (error) {
+    console.error('Error al eliminar el perfil:', error);
+  }
+}
+
+const volverInicio = () => {
+  router.push('/')
+}
+</script>
 
 <style scoped>
 #imageUser {
@@ -177,5 +175,16 @@ const volverInicio = () => {
 img {
   height: 100px;
   width: 100px;
+  border-radius: 50%;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
