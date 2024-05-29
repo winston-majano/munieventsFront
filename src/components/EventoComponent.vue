@@ -3,23 +3,19 @@
     <div class="card">
       <div class="row">
         <div class="col-md-4">
-          <img :src="event.photo" class="card-img img-fluid" />
+          <img :src='event.photo' class="card-img img-fluid">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">{{ event.title }}</h5>
+            <h5 class="card-title text-uppercase">{{ event.title }}</h5>
             <p class="card-text">{{ event.description }}</p>
-            <div class="valoracion">valoracion</div>
-            <!-- <a :href="'/detailEvento' + event.id" class="btn btn-primary">Ver mas</a> -->
-            <router-link 
-              :to="'/detailEvento/' + event.id"
-              class="btn btn-primary"
-              >Ver más</router-link
-            >
+            <!--  <a href="#" class="btn btn-primary">Ver más</a>-->
+            <router-link :to="'/detailEvento/' + event.id" class="btn btn-primary">Ver más</router-link>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
