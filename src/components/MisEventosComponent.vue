@@ -1,17 +1,39 @@
 <template>
     <div class="container">
-
-
-        <h1>Mis Eventos</h1>
+        <h1>Mis Eventos creados</h1>
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-8">
-                <ol v-for="event in eventsData" :key="event.id" class="list-group">
-                    <li class="list-group-item text-primary text-uppercase">{{ event }}</li>
-                </ol>
+             <div class="col-12 col-xs-12 col-md-3 py-4" v-for="event in eventsData" :key="event.id">
+            <div class="card" style="width: 18rem;">
+                <img :src="event.photo" class="card-img img-fluid rounded" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-success">Editar</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-danger">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> detailEvent
         </div>
+        </div>
+
+
+       
+       
     </div>
+
+
+
+
 </template>
 
 <script setup>
