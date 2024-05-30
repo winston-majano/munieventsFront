@@ -1,27 +1,32 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row news-section">
       <div class="col-12" v-for="(new1, index) in orderedNews" :key="new1.id">
-        <div class="card mb-4">
-          <div class="row g-0">
-            <div class="col-md-4 d-flex justify-content-center align-items-center" v-if="paginaInicio">
-              <img :src="new1.image_new" class="img-fluid small-square-image rounded-image" alt="Imagen Noticia 1">
-            </div>
-            <div class="col-md-4" v-else>
-              <img :src="new1.image_new" class="img-fluid fixed-size-image rounded-image" alt="Imagen Noticia 1">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 :class="{'small-title': paginaInicio}" class="card-title">{{ new1.title }}</h5>
-                <div v-if="paginaInicio">
-                  <span v-if="index < 3" class="badge bg-primary red-badge">¡Nuevo!</span>
+        <a :href="'/noticias?id=' + new1.id" class="text-decoration-none text-dark">
+           <!-- Si estamos viendo la página de noticias y es la primera noticia, añade un estilo distinto que le hemos llamado first-news-card.
+Si estamos en la página de inicio, añade otro estilo al que hemos llamado homepage-news-card. --> 
+          <div :class="['card mb-4 shadow-card', {'first-news-card': currentPage === '/noticias' && index === 0, 'homepage-news-card': paginaInicio}]">
+            <div class="row g-0">
+              <div class="col-md-4 d-flex justify-content-center align-items-center" v-if="paginaInicio">
+                <img :src="new1.image_new" class="img-fluid small-square-image rounded-image" alt="Imagen Noticia 1">
+              </div>
+              <div class="col-md-4" v-else>
+                <img :src="new1.image_new" class="img-fluid fixed-size-image rounded-image" alt="Imagen Noticia 1">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                    <!-- Si estamos en la pagina de inicio no se vera el boton nuevo --> 
+                  <h5 :class="{'small-title': paginaInicio}" class="card-title">{{ new1.title }}</h5>
+                  <div v-if="paginaInicio">
+                    <span v-if="index < 3" class="badge bg-primary red-badge">¡Nuevo!</span>
+                  </div>
+                  <p class="card-text" v-if="showReadMoreButton">{{ new1.description.substring(0, 100) }}...</p>
+                  <button v-if="showReadMoreButton" @click.prevent="showModal(new1)" class="btn btn-primary">Leer más</button>
                 </div>
-                <p class="card-text" v-if="showReadMoreButton">{{ new1.description.substring(0, 100) }}...</p>
-                <button v-if="showReadMoreButton" @click="showModal(new1)" class="btn btn-primary">Leer más</button>
               </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
     
@@ -64,7 +69,7 @@ const paginaInicio = currentPage !== '/noticias';
 fetch('http://localhost:8080/api/v1/news')
   .then(response => response.json())
   .then(data => {
-    // con esto organizamos por id las noticias, de mas antiguas a mas nuevas
+    // con esto organizamos por id las noticias, de las ultimas añadidas a las mas antiguas
     news.value = data.sort((a, b) => new Date(b.id) - new Date(a.id));
     console.log(data);
   });
@@ -98,6 +103,10 @@ const closeModal = () => {
 .card {
   display: flex;
   margin-bottom: 20px;
+}
+
+.shadow-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .small-square-image {
@@ -140,11 +149,9 @@ const closeModal = () => {
   margin-bottom: 0.5rem;
 }
 
-
 .small-title {
   font-size: 1rem; 
 }
-
 
 .red-badge {
   background-color: red !important; 
@@ -160,5 +167,21 @@ const closeModal = () => {
 
 .align-items-center {
   align-items: center;
+}
+
+.text-decoration-none {
+  text-decoration: none; 
+}
+
+.text-dark {
+  color: inherit; 
+}
+
+.news-section .first-news-card {
+  margin-top: 20px; 
+}
+
+.homepage-news-card {
+  margin: 10px; 
 }
 </style>
