@@ -26,6 +26,7 @@
               </div>
             </form>
             <p v-if="isLoggedStore.loginError" class="text-danger mt-3 text-center">{{ isLoggedStore.loginError }}</p>
+            <p v-if="isLoggedStore.isLoggedIn" class="alert alert-success mt-3 d-flex flex-column text-center" role="alert" >Login Correcto!</p>
           </div>
         </div>
       </div>
@@ -39,18 +40,20 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 
-
 const email = ref(null);
 const password = ref(null);
 const isLoggedStore = useIsLoggedStore();
 const router = useRouter();
 const showPassword = ref(false);
+const showSuccessLogin = ref(false);
 
 const handleLogin = async () => {
   await isLoggedStore.login(email.value, password.value);
 
   if (isLoggedStore.isLoggedIn) {
-    router.push('/');
+    setTimeout(()=>{
+    },2000)
+      router.push('/');
   }
 };
 

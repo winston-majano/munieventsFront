@@ -43,7 +43,7 @@
                 <button type="submit" class="btn btn-primary btn-block my-2">Create User</button>
               </div>
 
-              <div v-if="successMessage" class="alert alert-success mt-3" role="alert">
+              <div v-if="successMessage" class="alert alert-success mt-3 text-center" role="alert">
                 {{ successMessage }}
               </div>
               <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
@@ -103,7 +103,9 @@ async function createUser() {
     if (response.ok) {
       successMessage.value = 'Usuario creado correctamente.';
       isLoggedStore.loginError = '';
-      router.push("/login");
+      setTimeout(()=>{
+        router.push("/login");
+      },2000);
     } else if (response.status === 401) {
       errorMessage.value = 'Error al crear el usuario: email no válido, ya existe.';
       successMessage.value = '';
