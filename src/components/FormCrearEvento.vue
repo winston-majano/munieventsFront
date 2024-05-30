@@ -87,11 +87,9 @@
 </template>
 
 <script setup>
-
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useIsLoggedStore } from '@/stores/isLogged';
-
 
 const isLoggedStore = useIsLoggedStore();
 const router = useRouter();
@@ -101,8 +99,7 @@ const selectData = ref('');
 
 //obtener la fecha 
 let now = new Date();
-//console.log("Mostrando la hora: ", now.toISOString())
-//console.log("id del usuario logueado", isLoggedStore.user.id);
+
 //objeto evento
 const event = ref({
    title: '',
