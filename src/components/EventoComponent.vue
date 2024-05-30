@@ -17,16 +17,24 @@
     </div>
 
   </div>
-
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const events = ref(null);
-fetch('http://localhost:8080/api/v1/events')
-  .then(response => response.json())
-  .then(data => events.value = data);
+import { ref } from "vue";
+
+const events = ref({});
+fetch("http://localhost:8080/api/v1/events")
+  .then((response) => response.json())
+  .then((data) => (events.value = data));
 
 //console.log(events.titulo_imagen);
 </script>
-<style scoped></style>
+
+<style>
+.card-img,
+.card-img-bottom,
+.card-img-top {
+  width: 100%;
+  height: 100%;
+}
+</style>
