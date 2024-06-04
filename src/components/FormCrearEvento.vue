@@ -138,7 +138,7 @@ function cargarImagen(file) {
 const getCategory = async () => {
 
    try {
-      const response = await fetch('http://localhost:8080/api/v1/category', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/category`, {
          method: 'GET'
       });
      // console.log("Obteniendo la categoria: ", response)
@@ -163,7 +163,7 @@ const createEvent = async () => {
    const eventData = JSON.stringify(event.value);
    //console.log("DATA:",eventData)
    try {
-      const response = await fetch('http://localhost:8080/api/v1/events', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events`, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',

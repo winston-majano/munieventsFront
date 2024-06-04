@@ -66,7 +66,7 @@ const showReadMoreButton = ref(currentPage === '/noticias');
 const paginaInicio = currentPage !== '/noticias';
 
 // Fetch de las noticias
-fetch('http://localhost:8080/api/v1/news')
+fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/news`)
   .then(response => response.json())
   .then(data => {
     // con esto organizamos por id las noticias, de las ultimas añadidas a las mas antiguas

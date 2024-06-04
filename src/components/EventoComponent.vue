@@ -23,7 +23,7 @@
 import { ref } from "vue";
 
 const events = ref({});
-fetch("http://localhost:8080/api/v1/events")
+fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events`)
   .then((response) => response.json())
   .then((data) => (events.value = data));
 

@@ -40,7 +40,7 @@ const deleteResponse = ref('');
 const getMyEvents = async () => {
 
     try {
-        const response = await fetch(`http://localhost:8080/api/v1/events/user/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events/user/${id}`, {
             method: 'GET'
         });
         console.log("Obteniendo lista de nombre eventos: ", response)
@@ -63,7 +63,7 @@ getMyEvents();
 const deleteEvent = async (id) => {
    // console.log("El id que eliminare es: ",idEvent.value)
 try {
-   const response = await fetch(`http://localhost:8080/api/v1/events/${id}`, {
+   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events/${id}`, {
       method: 'DELETE'
    });
    // console.log("Obteniendo la categoria: ", response)

@@ -104,7 +104,7 @@ let usuario = ref('');
 
 //console.log("El parametro que viene es: ", eventId.value);
 
-fetch(`http://localhost:8080/api/v1/events/${eventId.value}`)
+fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events/${eventId.value}`)
    .then(response => response.json())
    .then(data => {
       events.value = data;
@@ -123,7 +123,7 @@ fetch(`http://localhost:8080/api/v1/events/${eventId.value}`)
 const getCategory = async () => {
 
    try {
-      const response = await fetch('http://localhost:8080/api/v1/category', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/category`, {
          method: 'GET'
       });
 
@@ -167,7 +167,7 @@ const editEvent = async () => {
    const eventData = JSON.stringify(events.value);
    console.log("La data que envio es: ", eventData)
    try {
-      const response = await fetch(`http://localhost:8080/api/v1/events/${eventId.value}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events/${eventId.value}`, {
          method: 'PUT',
          headers: {
             'Content-Type': 'application/json',

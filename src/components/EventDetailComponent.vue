@@ -33,7 +33,7 @@ const formatDateTime = (dateTimeString) => {
   return dateTime.toLocaleDateString('es-ES', options);
 };
 
-fetch(`http://localhost:8080/api/v1/events/${eventId.value}`)
+fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/events/${eventId.value}`)
   .then(response => response.json())
   .then(data => {
     events.value = data;
