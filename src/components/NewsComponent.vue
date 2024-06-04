@@ -8,7 +8,7 @@ Si estamos en la página de inicio, añade otro estilo al que hemos llamado home
           <div :class="['card mb-4 shadow-card', {'first-news-card': currentPage === '/noticias' && index === 0, 'homepage-news-card': paginaInicio}]">
             <div class="row g-0">
               <div class="col-md-4 d-flex justify-content-center align-items-center" v-if="paginaInicio">
-                <img :src="new1.image_new" class="img-fluid small-square-image rounded-image" alt="Imagen Noticia 1">
+                <img :src="new1.image_new" class="img-fluid small-square-image rounded-image image-custom" alt="Imagen Noticia 1">
               </div>
               <div class="col-md-4" v-else>
                 <img :src="new1.image_new" class="img-fluid fixed-size-image rounded-image" alt="Imagen Noticia 1">
@@ -183,5 +183,16 @@ const closeModal = () => {
 
 .homepage-news-card {
   margin: 10px; 
+  height: 120px;
+}
+.image-custom{
+  margin-top: 10px;
+
+
+}
+
+
+.news-section .col-md-4:first-child .image-custom {
+  margin-bottom: 10px;
 }
 </style>
