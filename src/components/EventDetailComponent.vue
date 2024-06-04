@@ -31,7 +31,7 @@ fetch(`http://localhost:8080/api/v1/events/${eventId.value}`)
   .then(response => response.json())
   .then(data => {
     events.value = data;
-    console.log("lista evento id", data);
+    console.log("Obteniendo evento por id desde detalle de eventos", data);
     event.value = events.value.find(evento => evento.id === eventId.value);
   })
 </script>

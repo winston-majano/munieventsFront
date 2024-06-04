@@ -12,16 +12,12 @@
                            
                     </div>
                     <div class="col-md-3">
-                        <button type="button" class="btn btn-warning mx-2">Editar</button>
-                            <button type="button" class="btn btn-danger">Eliminar</button>
+                        <router-link :to="'/editEvent/' + event.id" class="btn btn-warning mx-2">Editar</router-link>
+                            <button @click="deleteEvent(event.id)" class="btn btn-danger">Eliminar</button>
                     </div>
                 </div>
             </div>
     
-
-
-
-
 
 
 </template>
@@ -30,11 +26,16 @@
 import { ref } from 'vue';
 import { useIsLoggedStore } from '@/stores/isLogged';
 
+
+
 /// comentario de prueba 
 
 const isLoggedStore = useIsLoggedStore();
+
 const eventsData = ref('');
 const id = isLoggedStore.user.id;
+const deleteResponse = ref('');
+
 // Esta funcion trae todas las categorias para mostrarlos en el control select
 const getMyEvents = async () => {
 
@@ -44,7 +45,9 @@ const getMyEvents = async () => {
         });
         console.log("Obteniendo lista de nombre eventos: ", response)
         eventsData.value = await response.json();
-        console.log("Respuesta: ", eventsData.value)
+        //console.log("id data: ", eventsData.value.id)
+        idEvent.value = eventsData.value.id;
+        //console.log("id evento elimimnar: ", idEvent.value)
 
 
     } catch (error) {
@@ -55,6 +58,28 @@ const getMyEvents = async () => {
 
 //llamando a categorias 
 getMyEvents();
+
+//idEvent.value =  eventsData.id;
+const deleteEvent = async (id) => {
+   // console.log("El id que eliminare es: ",idEvent.value)
+try {
+   const response = await fetch(`http://localhost:8080/api/v1/events/${id}`, {
+      method: 'DELETE'
+   });
+   // console.log("Obteniendo la categoria: ", response)
+   deleteResponse.value = await response.text();
+   getMyEvents();
+   //routing.push('/misEventos')
+   console.log("Respuesta del delte: ", deleteResponse.value)
+
+
+} catch (error) {
+   console.log("Error exception: ", error.message)
+
+}
+}
+
+
 
 </script>
 
