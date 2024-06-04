@@ -190,7 +190,6 @@ const closeModal = () => {
 .homepage-news-card {
   margin: 10px; 
   height: 120px;
-<<<<<<< HEAD
 }
 .image-custom{
   margin-top: 10px;
@@ -201,7 +200,5 @@ const closeModal = () => {
 
 .news-section .col-md-4:first-child .image-custom {
   margin-bottom: 10px;
-=======
->>>>>>> News
 }
 </style>

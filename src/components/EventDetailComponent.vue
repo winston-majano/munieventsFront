@@ -37,15 +37,9 @@ fetch(`http://localhost:8080/api/v1/events/${eventId.value}`)
   .then(response => response.json())
   .then(data => {
     events.value = data;
-<<<<<<< HEAD
-    console.log("Obteniendo evento por id desde detalle de eventos", data);
+   // console.log("Obteniendo evento por id desde detalle de eventos", data);
     event.value = events.value.find(evento => evento.id === eventId.value);
   })
-=======
-    console.log("lista evento id", data);
-  });
-
->>>>>>> detailEvent
 </script>
 
 <style scoped>
