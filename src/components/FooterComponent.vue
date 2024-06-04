@@ -10,7 +10,9 @@
                                 <h5 class="text-white footer-title-01">MuniEvents</h5>
                                 <ul class="list-unstyled footer-link-01 m-0">
                                     <li>
-                                        <a class="text-white text-opacity-75" href="/About">Sobre nosotros</a>
+                                        <a class="ms-0" href="#">
+                                            <RouterLink to="/About" class="nav-link text-white m-0 p-0">Sobre nosotros</RouterLink>
+                                        </a>
                                     </li>
                                     <li>
                                         <a class="text-white text-opacity-75" href="#">Blog</a>
@@ -114,7 +116,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 const email = ref('');
 const message = ref('');
 

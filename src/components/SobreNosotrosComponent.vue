@@ -72,3 +72,8 @@
   border-radius: 7px;
 }
 </style>
+
+<script setup>
+
+console.log(`Que hay en .env?? ==>> ${import.meta.env.VITE_BACKEND_URL}/api/v1/users`)
+</script>

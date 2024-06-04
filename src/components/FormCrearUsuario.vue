@@ -95,7 +95,7 @@ async function createUser() {
     formData.append('password', user.value.password);
     formData.append('image_user', document.getElementById('imageUser').files[0]);
 
-    const response = await fetch('http://localhost:8080/api/v1/users', {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users`, {
       method: 'POST',
       body: formData
     });

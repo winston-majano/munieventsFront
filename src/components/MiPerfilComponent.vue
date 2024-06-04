@@ -93,7 +93,7 @@ const toggleForm = () => {
 }
 
 const getImageUrl = (imagePath) => {
-  return `http://localhost:8080/uploads/${imagePath}`;
+  return `${import.meta.env.VITE_BACKEND_URL}/uploads/${imagePath}`;
 }
 
 const obtenerImagen = (e) => {
@@ -117,7 +117,7 @@ const saveUser = async () => {
       formData.append('image_user', imageFile);
     }
 
-    const response = await fetch(`http://localhost:8080/api/v1/users/${isLoggedStore.user.id}`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users/${isLoggedStore.user.id}`, {
       method: 'PUT',
       body: formData
     });
@@ -139,7 +139,7 @@ const saveUser = async () => {
 
 const deleteUser = async () => {
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/users/${isLoggedStore.user.id}`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users/${isLoggedStore.user.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

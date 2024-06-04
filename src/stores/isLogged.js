@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-
+console.log(`Que hay en .env?? ==>> ${import.meta.env.VITE_BACKEND_URL}/api/v1/usersLogin`)
 export const useIsLoggedStore = defineStore('isLogged', () => {
   const isLoggedIn = ref(false);
   const user = ref(null);
   const loginError = ref('');
-
+ 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/usersLogin', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/usersLogin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
