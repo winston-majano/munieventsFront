@@ -93,7 +93,7 @@ const toggleForm = () => {
 }
 
 const getImageUrl = (imagePath) => {
-  return `${import.meta.env.VITE_BACKEND_URL}/src/main/resources/uploads/${imagePath}`;
+  return `${import.meta.env.VITE_BACKEND_URL}/${imagePath}`;
 }
 
 const obtenerImagen = (e) => {

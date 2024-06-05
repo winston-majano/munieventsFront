@@ -60,7 +60,7 @@ const isLoggedStore = useIsLoggedStore();
 const router = useRouter();
 
 const getImageUrl = (imagePath) => {
-  return `${import.meta.env.VITE_BACKEND_URL}/uploads/${imagePath}`;
+  return `${import.meta.env.VITE_BACKEND_URL}/${imagePath}`;
 }
 
 const handleLogout = () => {
